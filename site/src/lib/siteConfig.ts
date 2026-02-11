@@ -4,8 +4,8 @@ export const SITE = {
   //   PUBLIC_ISSUES_NEW_URL=https://github.com/OWNER/REPO/issues/new
   issuesNewUrl:
     import.meta.env.PUBLIC_ISSUES_NEW_URL ||
-    "https://github.com/<owner>/<repo>/issues/new",
+    "https://github.com/Nylan17/LexiAtlas/issues/new",
   issuesUrl:
-    import.meta.env.PUBLIC_ISSUES_URL || "https://github.com/<owner>/<repo>/issues"
+    import.meta.env.PUBLIC_ISSUES_URL || "https://github.com/Nylan17/LexiAtlas/issues"
 };
 

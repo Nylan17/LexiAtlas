@@ -41,10 +41,10 @@ import { SITE } from "../lib/siteConfig";
       const link = url.searchParams.get("url") || "";
       const title = lang ? `Link update: ${lang}` : "Link update";
       const body =
-        `Language page: ${lang || "<fill in>"}\n` +
-        `Current link: ${link || "<paste the link here>"}\n` +
-        `Recommended replacement: <paste replacement link>\n` +
-        `Notes: <why this is the right replacement / access details>\n`;
+        `Language page: ${lang || "(paste the language page URL)"}\n` +
+        `Current link: ${link || "(paste the current/broken link)"}\n` +
+        `Recommended replacement: (paste replacement link)\n` +
+        `Notes: (why this is the right replacement / access details)\n`;
       const issue = new URL(base);
       issue.searchParams.set("title", title);
       issue.searchParams.set("body", body);

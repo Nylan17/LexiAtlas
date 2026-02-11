@@ -77,8 +77,13 @@ Create a Cloudflare Pages project pointed at your GitHub repo and set:
 
 Optional environment variables:
 - `SITE_URL`: your production URL (used for metadata; can be left unset initially)
-- `PUBLIC_ISSUES_NEW_URL`: `https://github.com/<owner>/<repo>/issues/new` (for “Suggest link update”)
-- `PUBLIC_ISSUES_URL`: `https://github.com/<owner>/<repo>/issues` (issue list)
+- `PUBLIC_ISSUES_NEW_URL`: `https://github.com/Nylan17/LexiAtlas/issues/new` (for “Suggest link update”)
+- `PUBLIC_ISSUES_URL`: `https://github.com/Nylan17/LexiAtlas/issues` (issue list)
+
+## Licensing
+
+- Code and site implementation: see `LICENSE` (MIT).
+- Third‑party resources linked from the directory remain governed by their own rights/terms. See `CONTENT_NOTICE.md`.
 
 ## Attribution / takedown
 
