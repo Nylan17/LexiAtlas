@@ -12,6 +12,8 @@ const { title = "LexiAtlas", description = "A community-maintained directory of 
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#11131a" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -53,7 +55,6 @@ const { title = "LexiAtlas", description = "A community-maintained directory of 
             a.classList.add("archived-link");
             if (!a.getAttribute("data-archived")) {
               a.setAttribute("data-archived", "true");
-              a.insertAdjacentText("beforeend", " (archived)");
             }
           }
         }

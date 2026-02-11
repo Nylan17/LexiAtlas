@@ -1,0 +1,17 @@
+{
+  "name": "LexiAtlas",
+  "short_name": "LexiAtlas",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#11131a",
+  "theme_color": "#11131a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
+

@@ -48,6 +48,12 @@ a:hover { text-decoration: underline; }
   color: color-mix(in srgb, var(--link) 75%, var(--muted));
 }
 
+.archived-link[data-archived="true"]::after {
+  content: " (archived)";
+  color: var(--muted);
+  font-size: 0.95em;
+}
+
 .container {
   max-width: var(--max);
   padding: 24px;
