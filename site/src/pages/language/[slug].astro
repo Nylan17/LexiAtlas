@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { SITE } from "../../lib/siteConfig";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("languages");
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry }
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const contributeUrl = `/contribute/?lang=${encodeURIComponent(entry.slug)}`;
+---
+<BaseLayout title={`LexiAtlas — ${entry.data.title}`}>
+  <div class="card">
+    <article class="prose">
+      <p class="muted" style="margin:0 0 10px">
+        <a href="/">← Browse</a>
+      </p>
+      <h1 style="margin-top:0">{entry.data.title}</h1>
+      {(entry.data.aka?.length ?? 0) > 0 ? (
+        <p class="muted" style="margin-top:-6px">
+          Also known as: {entry.data.aka?.join(", ")}
+        </p>
+      ) : null}
+      <div class="muted" style="margin-top:-2px; font-size:0.95rem">
+        <p style="margin:0 0 6px">
+          <strong>Link legend</strong>: links marked “(archived)” open an Internet Archive snapshot because the original site is
+          down or unreliable.
+        </p>
+        <p style="margin:0">
+          See a dead/outdated resource link? <a href={contributeUrl}>Suggest a link update</a>.
+        </p>
+      </div>
+      <Content />
+      <hr />
+      <p class="muted" style="margin:0">
+        Noticed a problem? Use <a href={contributeUrl}>Contribute</a> or see <a href="/about/">About</a>.
+      </p>
+    </article>
+  </div>
+</BaseLayout>
+

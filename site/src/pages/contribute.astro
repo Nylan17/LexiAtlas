@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../lib/siteConfig";
+---
+<BaseLayout title="Contribute — LexiAtlas">
+  <div class="card">
+    <div class="prose">
+      <h1 style="margin-top:0">Contribute link updates</h1>
+      <p>
+        Many links were preserved via the Wayback Machine. If you know a better current URL for a resource
+        (or find a dead link), please tell us.
+      </p>
+
+      <h2>Fastest way</h2>
+      <p>
+        Open a GitHub issue with the details. Include:
+      </p>
+      <ul>
+        <li>Language page</li>
+        <li>Broken/current link</li>
+        <li>Recommended replacement link</li>
+        <li>Any notes (why this is the right replacement, access restrictions, etc.)</li>
+      </ul>
+
+      <p>
+        <a id="issueLink" href={SITE.issuesNewUrl}>Open a “link update” issue</a>
+        <span class="muted"> (opens the issue tracker)</span>
+      </p>
+
+      <p class="muted">
+        Issue list: <a href={SITE.issuesUrl}>{SITE.issuesUrl}</a>
+      </p>
+    </div>
+  </div>
+
+  <script is:inline>
+    const base = document.getElementById("issueLink").getAttribute("href");
+    try {
+      const url = new URL(window.location.href);
+      const lang = url.searchParams.get("lang") || "";
+      const link = url.searchParams.get("url") || "";
+      const title = lang ? `Link update: ${lang}` : "Link update";
+      const body =
+        `Language page: ${lang || "<fill in>"}\n` +
+        `Current link: ${link || "<paste the link here>"}\n` +
+        `Recommended replacement: <paste replacement link>\n` +
+        `Notes: <why this is the right replacement / access details>\n`;
+      const issue = new URL(base);
+      issue.searchParams.set("title", title);
+      issue.searchParams.set("body", body);
+      document.getElementById("issueLink").setAttribute("href", issue.toString());
+    } catch (_) {
+      // ignore
+    }
+  </script>
+</BaseLayout>
+

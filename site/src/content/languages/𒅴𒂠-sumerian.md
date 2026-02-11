@@ -1,0 +1,55 @@
+---
+title: "𒅴𒂠 Sumerian"
+source: "Imported from archival snapshot (ODT bootstrap)"
+attribution: "Original Lexicity creator (unknown/verify)"
+---
+
+## Dictionaries
+
+- [Pennsylvania Sumerian Dictionary](https://web.archive.org/web/20230401164432/http://psd.museum.upenn.edu/epsd/)
+  - Format: PDF
+  - Notes: The download links for the PDF files appear to be broken, but you can still use it online.
+
+- [PDF Lexicon](https://www.sumerian.org/sumerian.pdf)
+  - Format: PDF
+  - Notes: Seems to have a lot of words...
+
+## Grammars
+
+- [Introduction to Sumerian Grammar](https://web.archive.org/web/20230401161701/http://home.comcast.net/~foxvog/Grammar.pdf)
+  - Format: PDF
+  - Notes: An older text, but still very helpful.
+
+- [Sumerian Language](https://etcsl.orinst.ox.ac.uk/edition2/language.php)
+  - Notes: A brief introduction with some grammar topics.
+
+- [The Origin of the Sumerian Language](https://web.archive.org/web/20230401161701/http://gizidda.altervista.org/ebooks/TheOriginofSumerianLanguage.pdf)
+  - Format: PDF
+  - Notes: Not so much grammar, but still useful for placing the language in the proper context.
+
+- [Learn Sumerian Grammar](https://en.wikibooks.org/wiki/Sumerian)
+  - Notes: A collection of lessons from Wikibooks. Check it out!
+
+- [Memrise Sumerian Course](https://web.archive.org/web/20230401161701/http://www.memrise.com/course/682611/introductory-sumerian/)
+  - Notes: It's an online course for learning Sumerian; you'll have to create an account, though.
+
+## Charts & Aids
+
+(Nothing here.)
+
+## Texts
+
+- [Cuneiform Digital Library Initiative](https://cdli.earth/)
+  - Notes: Links to many different holdings of cuneiform items.
+
+- [Various Tablets Online](https://web.archive.org/web/20211024030200/http://www.smm.org/anthropology/cuneiform/catalog)
+  - Notes: With transcriptions, translations, and photos.
+
+- [Electronic Text Corpus of Sumerian Literature](https://etcsl.orinst.ox.ac.uk/)
+  - Notes: With different ways to search.
+
+## Other Resources
+
+- [Sumerian Grammar Bibliography](http://www.peust.de/SumerianBibliography.pdf)
+  - Format: PDF
+  - Notes: Very comprehensive.

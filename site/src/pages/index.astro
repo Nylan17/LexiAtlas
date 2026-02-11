@@ -1,0 +1,127 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const entries = await getCollection("languages");
+function englishSortKey(title: string): string {
+  const t = (title || "").trim();
+  // Prefer any Latin/ASCII-ish segment (usually the English name) for grouping/sorting.
+  const m = t.match(/[A-Za-z][A-Za-z0-9 .,'’()-]{1,}/);
+  return (m?.[0] || t).trim().toLowerCase();
+}
+
+const languages = entries
+  .filter((e) => e.slug !== "lexicityall-languages" && e.data.title !== "Lexicity/All Languages")
+  .map((e) => ({
+    title: e.data.title,
+    slug: e.slug,
+    sortKey: englishSortKey(e.data.title)
+  }))
+  .sort((a, b) => a.sortKey.localeCompare(b.sortKey) || a.title.localeCompare(b.title));
+
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const groups = new Map();
+for (const l of languages) {
+  const first = (l.sortKey || "").trim().charAt(0).toUpperCase();
+  const key = letters.includes(first) ? first : "#";
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key).push(l);
+}
+---
+<BaseLayout title="LexiAtlas — Browse">
+  <div class="grid">
+    <section class="card">
+      <div class="card-body">
+        <h1 style="margin:0 0 6px">Browse</h1>
+        <p class="muted" style="margin:0 0 12px">
+          Select a language to view resources. This revival is community-maintained.
+        </p>
+        <p style="margin:0 0 12px">
+          <a href="/search/">Search everything</a>
+        </p>
+        <label class="muted" for="filter">Filter</label>
+        <input id="filter" type="search" placeholder="Type to filter languages…" autocomplete="off" />
+        <div class="muted" id="filterStatus" style="margin-top:10px" aria-live="polite"></div>
+
+        <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
+          {letters.map((c) => (
+            <a class="muted" href={`#${c}`} style="font-family:var(--mono); font-size:0.9rem">{c}</a>
+          ))}
+          <a class="muted" href="#other" style="font-family:var(--mono); font-size:0.9rem">#</a>
+        </div>
+
+        <div class="lang-list" style="max-height: 60vh" aria-label="Language list">
+          {letters.map((c) =>
+            (groups.get(c) || []).length ? (
+              <section style="margin-top:12px">
+                <h2 id={c} class="muted" style="margin:10px 0 6px; font-size:0.95rem">{c}</h2>
+                <ul style="margin:0; padding:0; list-style:none">
+                  {(groups.get(c) || []).map((l) => (
+                    <li data-title={l.sortKey}>
+                      <a href={`/language/${l.slug}/`}>{l.title}</a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null
+          )}
+          {(groups.get("#") || []).length ? (
+            <section style="margin-top:12px">
+              <h2 id="other" class="muted" style="margin:10px 0 6px; font-size:0.95rem">Other</h2>
+              <ul style="margin:0; padding:0; list-style:none">
+                {(groups.get("#") || []).map((l) => (
+                  <li data-title={l.sortKey}>
+                    <a href={`/language/${l.slug}/`}>{l.title}</a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="prose">
+        <h1 style="margin-top:0">Welcome</h1>
+        <p>
+          LexiAtlas is a community-maintained index of resources for ancient and historical languages.
+          The goal is simple: make it easier to find grammars, dictionaries, texts, and learning material—then keep it current.
+        </p>
+        <p>
+          Learning a “dead” language is a living skill: it’s a way to read primary sources, understand how languages work,
+          and connect with communities of readers across time.
+        </p>
+        <p class="muted">
+          Start by choosing a language on the left, or try <a href="/search/">Search</a>.
+          If you notice a broken/outdated link, use <a href="/contribute/">Contribute</a>.
+        </p>
+        <hr />
+        <p class="muted">Imported language pages: {languages.length}.</p>
+      </div>
+    </section>
+  </div>
+
+  <script is:inline>
+    const input = document.getElementById("filter");
+    const status = document.getElementById("filterStatus");
+    const items = Array.from(document.querySelectorAll("[data-title]"));
+    function update() {
+      const q = (input.value || "").trim().toLowerCase();
+      let shown = 0;
+      for (const li of items) {
+        const t = li.getAttribute("data-title") || "";
+        const ok = !q || t.includes(q);
+        li.style.display = ok ? "" : "none";
+        if (ok) shown++;
+      }
+      status.textContent = q ? `${shown} match(es).` : `${items.length} language(s).`;
+    }
+    input.addEventListener("input", () => {
+      window.clearTimeout(window.__lexicityFilterT);
+      window.__lexicityFilterT = window.setTimeout(update, 80);
+    });
+    update();
+  </script>
+</BaseLayout>
+

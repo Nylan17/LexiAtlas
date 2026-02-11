@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const count = (await getCollection("languages")).length;
+---
+<BaseLayout title="About — LexiAtlas">
+  <div class="card">
+    <div class="prose">
+      <h1 style="margin-top:0">About this revival</h1>
+      <p>
+        This is a community-maintained directory of learning resources for ancient and historical languages,
+        inspired by an older passion project that went offline.
+        We started from an archival snapshot, then we curate and update links over time.
+      </p>
+      <h2>How it works</h2>
+      <ul>
+        <li>Each language has its own page.</li>
+        <li>Content lives in version-controlled Markdown (easy to review and improve).</li>
+        <li>Search is static (no server), and the site is deployed as static files.</li>
+      </ul>
+      <h2>Contributing</h2>
+      <p>
+        If you find better current URLs for resources (or dead links), use <a href="/contribute/">Contribute</a>.
+        For attribution and takedown notes, see <a href="/usage/">Usage</a>.
+      </p>
+      <p class="muted">
+        Current imported language pages: {count}.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+

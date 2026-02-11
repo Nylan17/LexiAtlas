@@ -1,0 +1,64 @@
+---
+import "../styles/global.css";
+
+const { title = "LexiAtlas", description = "A community-maintained directory of learning resources for ancient and historical languages." } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">
+          <a class="brand-title" href="/">LexiAtlas</a>
+          <span class="brand-subtitle">community index</span>
+        </div>
+        <nav class="nav" aria-label="Primary">
+          <a href="/search/">Search</a>
+          <a href="/contribute/">Contribute</a>
+          <a href="/about/">About</a>
+          <a href="/credits/">Credits</a>
+          <a href="/usage/">Usage</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="container">
+      <slot />
+    </main>
+    <script is:inline>
+      // Mark external + archived (Wayback) links for safety/clarity.
+      // - open external links in a new tab
+      // - add rel=noopener/noreferrer
+      // - label Wayback links as archived
+      try {
+        const anchors = document.querySelectorAll('a[href^="http://"], a[href^="https://"]');
+        for (const a of anchors) {
+          const href = a.getAttribute("href") || "";
+          const isWayback = href.includes("web.archive.org/web/");
+          const isSameOrigin = href.startsWith(window.location.origin);
+          if (!isSameOrigin) {
+            a.setAttribute("target", "_blank");
+            a.setAttribute("rel", "noopener noreferrer");
+            a.classList.add("external-link");
+          }
+          if (isWayback) {
+            a.classList.add("archived-link");
+            if (!a.getAttribute("data-archived")) {
+              a.setAttribute("data-archived", "true");
+              a.insertAdjacentText("beforeend", " (archived)");
+            }
+          }
+        }
+      } catch (_) {}
+    </script>
+  </body>
+</html>
+

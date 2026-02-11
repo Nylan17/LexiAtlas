@@ -1,0 +1,89 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Search — LexiAtlas">
+  <div class="card">
+    <div class="prose">
+      <h1 style="margin-top:0">Search</h1>
+      <p class="muted" style="margin-top:-6px">
+        Search across languages and resource pages. If you don’t see what you expect, try a shorter query or browse from the home page.
+      </p>
+
+      <label for="q">Query</label>
+      <input id="q" type="search" placeholder="Search languages and pages…" autocomplete="off" />
+
+      <div id="status" class="muted" style="margin-top:10px"></div>
+      <ol id="results" style="padding-left: 20px"></ol>
+    </div>
+  </div>
+
+  <script is:inline>
+    const q = document.getElementById("q");
+    const resultsEl = document.getElementById("results");
+    const statusEl = document.getElementById("status");
+
+    let pagefind = null;
+    async function loadPagefind() {
+      if (pagefind) return pagefind;
+      // Generated at deploy/build time.
+      const mod = await import("/pagefind/pagefind.js");
+      pagefind = mod;
+      return pagefind;
+    }
+
+    function setStatus(msg) {
+      statusEl.textContent = msg || "";
+    }
+
+    function clearResults() {
+      resultsEl.innerHTML = "";
+    }
+
+    function addResult({ url, title, excerpt }) {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <div style="margin: 10px 0">
+          <div><a href="${url}">${title || url}</a></div>
+          <div class="muted" style="margin-top:4px">${excerpt || ""}</div>
+        </div>
+      `;
+      resultsEl.appendChild(li);
+    }
+
+    let last = "";
+    async function runSearch() {
+      const term = (q.value || "").trim();
+      if (term === last) return;
+      last = term;
+      clearResults();
+      if (!term) {
+        setStatus("");
+        return;
+      }
+      setStatus("Searching…");
+      try {
+        const pf = await loadPagefind();
+        const search = await pf.search(term);
+        if (!search?.results?.length) {
+          setStatus("No results.");
+          return;
+        }
+        setStatus(`${search.results.length} result(s).`);
+        for (const r of search.results.slice(0, 25)) {
+          const data = await r.data();
+          addResult({ url: data.url, title: data.meta?.title, excerpt: data.excerpt });
+        }
+      } catch (e) {
+        console.error(e);
+        setStatus("Search is temporarily unavailable. You can still browse languages from the home page.");
+      }
+    }
+
+    q.addEventListener("input", () => {
+      // lightweight debounce
+      window.clearTimeout(window.__lexicitySearchT);
+      window.__lexicitySearchT = window.setTimeout(runSearch, 120);
+    });
+  </script>
+</BaseLayout>
+
