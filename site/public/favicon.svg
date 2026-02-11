@@ -1,6 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="LexiAtlas">
   <rect width="64" height="64" rx="14" fill="#11131a"/>
-  <path d="M18 48V16h8v25h18v7H18z" fill="#8ab4ff"/>
-  <path d="M38 48V16h8v25h10v7H38z" fill="#c9dcff" opacity="0.95"/>
+  <!-- Simple \"atlas\" globe mark (reads well at small sizes) -->
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#8ab4ff" stroke-width="4"/>
+  <path d="M32 14c6 6 6 30 0 36" fill="none" stroke="#c9dcff" stroke-width="3" opacity="0.95"/>
+  <path d="M32 14c-6 6-6 30 0 36" fill="none" stroke="#c9dcff" stroke-width="3" opacity="0.95"/>
+  <path d="M16 32h32" fill="none" stroke="#c9dcff" stroke-width="3" opacity="0.75"/>
 </svg>
 
