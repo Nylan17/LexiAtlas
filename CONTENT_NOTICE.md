@@ -14,9 +14,7 @@ LexiAtlas is a community-maintained directory of links to third‑party learning
 
 ## Takedown / corrections
 
-If you are the original creator, represent the rights holder, or believe any material should be removed or corrected, contact:
-
-- `admin@lexiatlas.org`
+If you are the original creator, represent the rights holder, or believe any material should be removed or corrected, please open an issue in the project repository.
 
 Please include the page URL(s) and the requested change.
 
