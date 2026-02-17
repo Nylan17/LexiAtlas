@@ -1,5 +1,20 @@
 ---
 title: "LATINA Latin"
+blurb: "Latin is the language of the Roman world and a cornerstone for Western historical texts, inscriptions, and medieval scholarship. It’s also a practical bridge to Romance languages and a huge body of literature."
+family: "Indo-European"
+branch: "Italic"
+region:
+  - "Italy and the Roman Mediterranean"
+period:
+  label: "c. 700 BCE → present (classical + medieval focus in many resources)"
+  start: -700
+  end: 2025
+geo:
+  center:
+    lat: 41.9
+    lon: 12.5
+  radiusKm: 1400
+  note: "Centered on Rome; spread widely across the Roman and later medieval world."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

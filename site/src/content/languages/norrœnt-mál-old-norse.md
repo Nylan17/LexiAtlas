@@ -1,5 +1,20 @@
 ---
 title: "Norrœnt mál Old Norse"
+blurb: "Old Norse is the language of the Icelandic sagas, eddic poetry, and a wide range of medieval Scandinavian texts. It’s a rewarding choice if you want to read Norse literature in the original and trace North Germanic history."
+family: "Indo-European"
+branch: "Germanic"
+region:
+  - "Scandinavia and the North Atlantic (medieval)"
+period:
+  label: "c. 700 CE → 1400 CE (varies by dialect and corpus)"
+  start: 700
+  end: 1400
+geo:
+  center:
+    lat: 64.9
+    lon: -18.6
+  radiusKm: 1300
+  note: "Centered on the North Atlantic/Scandinavia region; dialect boundaries shift over time."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

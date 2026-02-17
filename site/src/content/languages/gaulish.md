@@ -1,5 +1,20 @@
 ---
 title: "Gaulish"
+blurb: "Gaulish is a Celtic language once spoken in much of what is now France and neighboring regions, known mostly from inscriptions and names. It’s useful for Celtic historical linguistics and for reading epigraphic evidence from Roman Gaul."
+family: "Indo-European"
+branch: "Celtic"
+region:
+  - "Gaul (modern France and neighboring regions)"
+period:
+  label: "c. 300 BCE → 500 CE (fragmentary attestation)"
+  start: -300
+  end: 500
+geo:
+  center:
+    lat: 46.2
+    lon: 2.2
+  radiusKm: 650
+  note: "A broad modern-reference region; evidence is mostly inscriptions and onomastics."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

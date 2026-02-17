@@ -1,5 +1,20 @@
 ---
 title: "Old Frisian"
+blurb: "Old Frisian is a medieval West Germanic language known largely from legal texts and documents. It’s particularly interesting for comparing early Germanic languages and the history of the North Sea cultural zone."
+family: "Indo-European"
+branch: "Germanic"
+region:
+  - "Frisia (North Sea coast of the Netherlands and Germany, medieval)"
+period:
+  label: "c. 1200 CE → 1550 CE (main written record)"
+  start: 1200
+  end: 1550
+geo:
+  center:
+    lat: 53.2
+    lon: 5.8
+  radiusKm: 350
+  note: "Approximate North Sea coastal region; most evidence is legal/documentary."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

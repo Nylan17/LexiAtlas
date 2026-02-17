@@ -1,5 +1,20 @@
 ---
 title: "العربية Arabic"
+blurb: "Arabic opens a long written tradition spanning pre-Islamic poetry, the Qur’an, medieval scholarship, and modern literature. It’s also a gateway to Semitic linguistics and the diversity of regional varieties."
+family: "Afroasiatic"
+branch: "Semitic"
+region:
+  - "Arabian Peninsula and the wider Arabic-speaking world"
+period:
+  label: "c. 400 CE → present (classical focus in many resources)"
+  start: 400
+  end: 2025
+geo:
+  center:
+    lat: 24.7
+    lon: 46.7
+  radiusKm: 2200
+  note: "A broad, modern-reference region; varieties and historic centers differ by period."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

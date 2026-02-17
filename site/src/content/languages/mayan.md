@@ -1,5 +1,19 @@
 ---
 title: "Mayan"
+blurb: "“Mayan” refers to a family of languages of Mesoamerica, including both living languages and the Classical Maya written tradition. This page is a good starting point for learners and readers interested in Maya scripts, texts, and comparative resources."
+family: "Mayan"
+region:
+  - "Mesoamerica (southern Mexico, Guatemala, Belize, and nearby areas)"
+period:
+  label: "c. 1000 BCE → present (family; classical inscriptions peak 250–900 CE)"
+  start: -1000
+  end: 2025
+geo:
+  center:
+    lat: 16.9
+    lon: -90.5
+  radiusKm: 900
+  note: "Broad modern-reference region; individual Mayan languages have distinct distributions."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

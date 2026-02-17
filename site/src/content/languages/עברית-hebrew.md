@@ -1,5 +1,20 @@
 ---
 title: "עברית Hebrew"
+blurb: "Hebrew is the language of much of the Hebrew Bible and a central thread of Jewish literary and religious history. Learning it connects you to inscriptions, classical texts, and (in its modern form) a living speech community."
+family: "Afroasiatic"
+branch: "Semitic"
+region:
+  - "Levant (modern Israel/Palestine and surrounding regions)"
+period:
+  label: "1st millennium BCE → present (biblical/classical focus in many resources)"
+  start: -1000
+  end: 2025
+geo:
+  center:
+    lat: 31.8
+    lon: 35.2
+  radiusKm: 650
+  note: "Centered on the Levant; the textual tradition spans many centuries and communities."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

@@ -1,5 +1,20 @@
 ---
 title: "Franceis Old French"
+blurb: "Old French is the language of medieval French literature, charters, and early Romance development in northern France. It’s a practical bridge from Latin to later French and a rich corpus of epics and romances."
+family: "Indo-European"
+branch: "Romance"
+region:
+  - "Northern France (medieval)"
+period:
+  label: "c. 800 CE → 1400 CE"
+  start: 800
+  end: 1400
+geo:
+  center:
+    lat: 48.9
+    lon: 2.3
+  radiusKm: 450
+  note: "Approximate northern France; dialects vary and boundaries shift over time."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

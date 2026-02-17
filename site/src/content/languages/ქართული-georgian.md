@@ -1,5 +1,19 @@
 ---
 title: "ქართული Georgian"
+blurb: "Georgian has a long written tradition and is a key language of the Caucasus with rich medieval and modern literature. It’s especially useful for readers interested in Caucasus history, Christianity, and manuscript culture."
+family: "Kartvelian"
+region:
+  - "Caucasus (Georgia and surrounding regions)"
+period:
+  label: "5th century CE → present (written tradition)"
+  start: 430
+  end: 2025
+geo:
+  center:
+    lat: 41.7
+    lon: 44.8
+  radiusKm: 450
+  note: "Centered on Georgia; dialects and literary centers vary across time."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

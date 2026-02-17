@@ -1,5 +1,20 @@
 ---
 title: "ארמית Aramaic"
+blurb: "Aramaic refers to a long-running group of Semitic languages with an enormous historical footprint in the Near East. It’s a great choice for readers interested in inscriptions, imperial administration, and later Jewish and Christian texts."
+family: "Afroasiatic"
+branch: "Semitic"
+region:
+  - "Levant and Mesopotamia (and beyond, historically)"
+period:
+  label: "c. 1000 BCE → present (many Aramaic languages and stages)"
+  start: -1000
+  end: 2025
+geo:
+  center:
+    lat: 35.2
+    lon: 39.0
+  radiusKm: 1300
+  note: "Broad modern-reference region; ‘Aramaic’ covers many distinct languages across time."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

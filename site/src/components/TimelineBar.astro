@@ -1,0 +1,76 @@
+---
+type Period = {
+  start?: number;
+  end?: number;
+  label?: string;
+};
+
+type Props = {
+  period?: Period;
+  // Domain for visual placement only; does not claim precision.
+  domainStart?: number;
+  domainEnd?: number;
+  title?: string;
+};
+
+const {
+  period,
+  domainStart = -3500,
+  domainEnd = 2025,
+  title = "Timeline"
+} = Astro.props as Props;
+
+function clamp01(n: number) {
+  return Math.max(0, Math.min(1, n));
+}
+
+function fmtYear(y: number) {
+  const abs = Math.abs(Math.trunc(y));
+  if (y < 0) return `${abs} BCE`;
+  return `${abs} CE`;
+}
+
+function fmtRange(p?: Period) {
+  if (!p) return "";
+  if (p.label) return p.label;
+  const s = typeof p.start === "number" ? fmtYear(p.start) : "";
+  const e = typeof p.end === "number" ? fmtYear(p.end) : "";
+  if (s && e) return `${s} → ${e}`;
+  return s || e || "";
+}
+
+const text = fmtRange(period);
+const has = !!text;
+
+const s = typeof period?.start === "number" ? period!.start! : null;
+const e = typeof period?.end === "number" ? period!.end! : null;
+const min = domainStart;
+const max = domainEnd;
+
+let left = 0.0;
+let width = 1.0;
+if (s !== null && e !== null) {
+  const a = clamp01((Math.min(s, e) - min) / (max - min));
+  const b = clamp01((Math.max(s, e) - min) / (max - min));
+  left = a;
+  width = Math.max(0.02, b - a);
+} else if (s !== null) {
+  const a = clamp01((s - min) / (max - min));
+  left = a;
+  width = 0.04;
+} else if (e !== null) {
+  const b = clamp01((e - min) / (max - min));
+  left = Math.max(0, b - 0.04);
+  width = 0.04;
+}
+---
+
+{has ? (
+  <div class="timeline" aria-label={title}>
+    <div class="timeline-bar" aria-hidden="true">
+      <div class="timeline-span" style={`left:${left * 100}%; width:${width * 100}%`} />
+    </div>
+    <div class="muted timeline-label">{text}</div>
+  </div>
+) : null}
+

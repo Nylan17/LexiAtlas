@@ -1,5 +1,20 @@
 ---
 title: "上古漢語 Old Chinese"
+blurb: "Old Chinese covers the earliest stages of Chinese attested in inscriptions and classical texts. It’s the foundation for historical phonology and for reading early sources in their linguistic context."
+family: "Sino-Tibetan"
+branch: "Sinitic"
+region:
+  - "North China Plain and early Chinese states"
+period:
+  label: "c. 1250 BCE → 200 CE (Shang to Han; broad period label)"
+  start: -1250
+  end: 200
+geo:
+  center:
+    lat: 34.5
+    lon: 113.7
+  radiusKm: 900
+  note: "Broad modern-reference region; the label ‘Old Chinese’ spans multiple stages and reconstructions."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

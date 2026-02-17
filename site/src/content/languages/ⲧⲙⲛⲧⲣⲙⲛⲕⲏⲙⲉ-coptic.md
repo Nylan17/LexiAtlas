@@ -1,5 +1,20 @@
 ---
 title: "ⲧⲙⲛ̄ⲧⲣⲙ̄ⲛ̄ⲕⲏⲙⲉ Coptic"
+blurb: "Coptic is the latest written stage of Egyptian, preserved in a large Christian literary tradition and documentary texts. It’s a key language for late antique Egypt, early monasticism, and the transmission of texts."
+family: "Afroasiatic"
+branch: "Egyptian"
+region:
+  - "Egypt (late antique and medieval)"
+period:
+  label: "c. 200 CE → present (liturgical use continues)"
+  start: 200
+  end: 2025
+geo:
+  center:
+    lat: 30.0
+    lon: 31.2
+  radiusKm: 650
+  note: "Centered on Egypt; many texts are from late antiquity with ongoing liturgical use."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

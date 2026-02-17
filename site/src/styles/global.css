@@ -99,6 +99,85 @@ a:hover { text-decoration: underline; }
   flex-wrap: wrap;
 }
 
+.browse-details {
+  border-radius: 10px;
+}
+
+.browse-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 10px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--panel) 88%, var(--bg));
+  border: 1px solid var(--border);
+}
+
+.browse-summary::-webkit-details-marker { display: none; }
+.browse-summary:hover {
+  background: color-mix(in srgb, var(--panel) 78%, var(--bg));
+}
+
+.segmented {
+  display: inline-flex;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel) 86%, var(--bg));
+}
+
+.seg-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-family: var(--sans);
+  cursor: pointer;
+}
+
+.seg-btn[aria-selected="true"] {
+  background: color-mix(in srgb, var(--panel) 60%, var(--bg));
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.facet-grid {
+  margin-top: 12px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 901px) {
+  .facet-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel) 88%, var(--bg));
+  color: var(--text);
+}
+
+.jump-row {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+#browseRoot[data-view="family"] [data-list="az"],
+#browseRoot[data-view="family"] [data-only="az"] {
+  display: none;
+}
+#browseRoot[data-view="az"] [data-list="family"] {
+  display: none;
+}
+
 .grid {
   display: grid;
   gap: 18px;
@@ -150,6 +229,115 @@ input[type="search"] {
 
 .prose {
   padding: 18px;
+}
+
+.lead {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  margin: 10px 0 14px;
+  color: color-mix(in srgb, var(--text) 90%, var(--muted));
+}
+
+.context-block {
+  margin: 14px 0 12px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel) 90%, var(--bg));
+}
+
+.context-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+@media (min-width: 901px) {
+  .context-grid {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+}
+
+.facts {
+  display: grid;
+  gap: 8px;
+}
+.facts-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel) 82%, var(--bg));
+  font-size: 0.92rem;
+}
+.chip-muted {
+  color: var(--muted);
+  background: color-mix(in srgb, var(--panel) 90%, var(--bg));
+}
+
+.map {
+  margin: 0;
+}
+.map svg {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+.map-bg {
+  fill: color-mix(in srgb, var(--panel) 86%, var(--bg));
+}
+.map-grid {
+  stroke: color-mix(in srgb, var(--border) 70%, transparent);
+  stroke-width: 1;
+}
+.map-land {
+  fill: color-mix(in srgb, var(--text) 6%, transparent);
+  stroke: color-mix(in srgb, var(--border) 55%, transparent);
+  stroke-width: 0.9;
+}
+.map-region {
+  fill: color-mix(in srgb, var(--link) 16%, transparent);
+  stroke: color-mix(in srgb, var(--link) 55%, transparent);
+  stroke-width: 1.2;
+}
+.map-dot {
+  fill: var(--link);
+  stroke: color-mix(in srgb, var(--panel) 40%, transparent);
+  stroke-width: 1;
+}
+
+.timeline {
+  margin-top: 10px;
+}
+.timeline-bar {
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel) 88%, var(--bg));
+  overflow: hidden;
+}
+.timeline-span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--link) 38%, transparent);
+  border: 1px solid color-mix(in srgb, var(--link) 60%, transparent);
+}
+.timeline-label {
+  margin-top: 6px;
+  font-size: 0.95rem;
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4 {

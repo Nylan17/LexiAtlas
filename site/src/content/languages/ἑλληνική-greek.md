@@ -1,5 +1,20 @@
 ---
 title: "Ἑλληνική Greek"
+blurb: "Ancient Greek is the language of Homer, classical philosophy, and a vast corpus of history, drama, and science. It’s also essential for many early Christian and Byzantine texts."
+family: "Indo-European"
+branch: "Hellenic"
+region:
+  - "Aegean and Eastern Mediterranean"
+period:
+  label: "c. 1500 BCE → present (many stages; resources often focus on ancient/Koine)"
+  start: -1500
+  end: 2025
+geo:
+  center:
+    lat: 37.9
+    lon: 23.7
+  radiusKm: 1100
+  note: "Centered on the Aegean; varieties and historical centers change across time."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

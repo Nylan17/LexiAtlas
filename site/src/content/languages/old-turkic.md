@@ -1,5 +1,19 @@
 ---
 title: "Old Turkic"
+blurb: "Old Turkic refers to early Turkic texts such as the Orkhon inscriptions and related Old Turkic corpora. It’s an excellent entry point for Turkic historical linguistics and Inner Asian history."
+family: "Turkic"
+region:
+  - "Inner Asia (Mongolia and Central Asia)"
+period:
+  label: "c. 700 CE → 1100 CE (major inscriptional and manuscript corpora)"
+  start: 700
+  end: 1100
+geo:
+  center:
+    lat: 47.9
+    lon: 106.9
+  radiusKm: 1600
+  note: "Broad modern-reference region; corpora come from multiple sites and polities."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

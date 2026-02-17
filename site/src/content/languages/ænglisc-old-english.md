@@ -1,5 +1,20 @@
 ---
 title: "Ænglisc Old English"
+blurb: "Old English is the language of early medieval England—think Beowulf, homilies, charters, and riddles. It’s also a great on-ramp to historical linguistics and the evolution of modern English."
+family: "Indo-European"
+branch: "Germanic"
+region:
+  - "England (early medieval)"
+period:
+  label: "c. 500 CE → 1100 CE"
+  start: 500
+  end: 1100
+geo:
+  center:
+    lat: 52.2
+    lon: -1.5
+  radiusKm: 350
+  note: "Approximate coverage of early medieval England; dialects vary by region."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

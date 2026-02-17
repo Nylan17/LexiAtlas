@@ -2,6 +2,9 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { SITE } from "../../lib/siteConfig";
+import LanguageFacts from "../../components/LanguageFacts.astro";
+import LocatorMap from "../../components/LocatorMap.astro";
+import TimelineBar from "../../components/TimelineBar.astro";
 
 export async function getStaticPaths() {
   const entries = await getCollection("languages");
@@ -14,6 +17,15 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 const contributeUrl = `/contribute/?lang=${encodeURIComponent(entry.slug)}`;
+
+const hasContext =
+  !!entry.data.blurb ||
+  !!entry.data.family ||
+  !!entry.data.branch ||
+  !!entry.data.region ||
+  !!entry.data.period ||
+  !!entry.data.geo ||
+  (entry.data.tags?.length ?? 0) > 0;
 ---
 <BaseLayout title={`LexiAtlas — ${entry.data.title}`}>
   <div class="card">
@@ -27,6 +39,28 @@ const contributeUrl = `/contribute/?lang=${encodeURIComponent(entry.slug)}`;
           Also known as: {entry.data.aka?.join(", ")}
         </p>
       ) : null}
+      {entry.data.blurb ? <p class="lead">{entry.data.blurb}</p> : null}
+
+      {hasContext ? (
+        <section class="context-block" aria-label="At a glance">
+          <div class="context-grid">
+            <div>
+              <LanguageFacts
+                family={entry.data.family}
+                branch={entry.data.branch}
+                region={entry.data.region}
+                period={entry.data.period}
+                tags={entry.data.tags}
+              />
+              <TimelineBar period={entry.data.period} />
+            </div>
+            <div>
+              <LocatorMap geo={entry.data.geo} title={`Approximate modern reference for ${entry.data.title}`} />
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       <div class="muted" style="margin-top:-2px; font-size:0.95rem">
         <p style="margin:0 0 6px">
           <strong>Link legend</strong>: links marked “(archived)” open an Internet Archive snapshot because the original site is

@@ -1,5 +1,20 @@
 ---
 title: "ᚌᚑᚔᚇᚓᚂᚉ Old Irish"
+blurb: "Old Irish is a richly attested early medieval Celtic language, preserved in glosses, poems, and prose texts. It’s a rewarding path into Celtic linguistics and medieval Irish literature."
+family: "Indo-European"
+branch: "Celtic"
+region:
+  - "Ireland (early medieval)"
+period:
+  label: "c. 600 CE → 900 CE (main written record)"
+  start: 600
+  end: 900
+geo:
+  center:
+    lat: 53.3
+    lon: -7.7
+  radiusKm: 380
+  note: "Centered on Ireland; evidence is heavily manuscript-based and dialectal variation exists."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

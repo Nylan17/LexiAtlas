@@ -1,5 +1,20 @@
 ---
 title: "Old High German"
+blurb: "Old High German is a key early stage of German, preserved in glosses, religious texts, and poetry. It’s a strong choice for readers interested in medieval Europe and the development of Germanic languages."
+family: "Indo-European"
+branch: "Germanic"
+region:
+  - "Southern Germany, Austria, and Switzerland (early medieval)"
+period:
+  label: "c. 500 CE → 1050 CE"
+  start: 500
+  end: 1050
+geo:
+  center:
+    lat: 48.1
+    lon: 11.6
+  radiusKm: 450
+  note: "Approximate southern German-speaking regions; boundaries vary across time."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

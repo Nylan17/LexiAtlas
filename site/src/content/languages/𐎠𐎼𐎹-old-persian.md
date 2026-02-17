@@ -1,5 +1,20 @@
 ---
 title: "𐎠𐎼𐎹 Old Persian"
+blurb: "Old Persian is the language of Achaemenid royal inscriptions, written in its own cuneiform script. It’s ideal if you want primary sources for the Persian Empire and a compact, learnable corpus."
+family: "Indo-European"
+branch: "Indo-Iranian"
+region:
+  - "Iran and the Achaemenid Empire"
+period:
+  label: "c. 520 BCE → 330 BCE (royal inscriptional corpus)"
+  start: -520
+  end: -330
+geo:
+  center:
+    lat: 29.9
+    lon: 52.9
+  radiusKm: 700
+  note: "Centered on Persis/Persepolis; mainly attested in royal inscriptions."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

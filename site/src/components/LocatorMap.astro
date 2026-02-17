@@ -1,0 +1,163 @@
+---
+type Geo = {
+  center?: { lat: number; lon: number };
+  radiusKm?: number;
+  bbox?: [number, number, number, number]; // [westLon, southLat, eastLon, northLat]
+  note?: string;
+};
+
+type Props = {
+  geo?: Geo;
+  title?: string;
+};
+
+const { geo, title = "Approximate location" } = Astro.props as Props;
+
+const W = 360;
+const H = 180;
+
+import { geoEquirectangular, geoPath } from "d3-geo";
+import { feature } from "topojson-client";
+// Provided by the `world-atlas` package (Natural Earth-derived, low-res).
+// Loaded at build time and rendered as a borderless land silhouette.
+import landTopo from "world-atlas/land-110m.json";
+
+const scale = W / (2 * Math.PI);
+const projection = geoEquirectangular().scale(scale).translate([W / 2, H / 2]);
+const pathGen = geoPath(projection);
+
+// Convert TopoJSON → GeoJSON MultiPolygon and make a single SVG path.
+const landFeature = feature(
+  landTopo as any,
+  (landTopo as any).objects.land
+) as any;
+const landPath = (pathGen(landFeature) as string) || "";
+
+function clamp(n: number, lo: number, hi: number) {
+  return Math.max(lo, Math.min(hi, n));
+}
+
+function normLon(lon: number) {
+  return ((lon + 180) % 360 + 360) % 360 - 180;
+}
+
+function proj(lat: number, lon: number) {
+  const clat = clamp(lat, -85, 85);
+  const clon = normLon(lon);
+  const p = projection([clon, clat]);
+  return { x: p?.[0] ?? 0, y: p?.[1] ?? 0, clat, clon };
+}
+
+function kmToLatDeg(km: number) {
+  return km / 111;
+}
+function kmToLonDegAtLat(km: number, lat: number) {
+  const r = (Math.PI / 180) * lat;
+  const denom = 111 * Math.max(0.2, Math.cos(r));
+  return km / denom;
+}
+
+const hasGeo = !!geo?.center || !!geo?.bbox;
+let osmHref: string | null = null;
+if (geo?.center) {
+  const { lat, lon } = geo.center;
+  osmHref = `https://www.openstreetmap.org/?mlat=${encodeURIComponent(
+    lat
+  )}&mlon=${encodeURIComponent(lon)}#map=5/${encodeURIComponent(lat)}/${encodeURIComponent(lon)}`;
+}
+
+// Precompute draw params.
+let dot: { cx: number; cy: number } | null = null;
+let radius: { rx: number; ry: number; cx: number; cy: number } | null = null;
+let rect: { x: number; y: number; w: number; h: number } | null = null;
+
+if (geo?.center) {
+  const p = proj(geo.center.lat, geo.center.lon);
+  dot = { cx: p.x, cy: p.y };
+  const km = geo.radiusKm ?? 0;
+  if (km > 0) {
+    const ry = kmToLatDeg(km);
+    const rx = kmToLonDegAtLat(km, p.clat);
+    // Convert degree deltas into projected pixel deltas.
+    const px1 = proj(p.clat + ry, p.clon);
+    const px2 = proj(p.clat, p.clon + rx);
+    radius = { rx: Math.abs(px2.x - p.x), ry: Math.abs(px1.y - p.y), cx: p.x, cy: p.y };
+  }
+}
+
+if (geo?.bbox) {
+  const [wLon, sLat, eLon, nLat] = geo.bbox;
+  const p1 = proj(nLat, wLon);
+  const p2 = proj(sLat, eLon);
+  const x = Math.min(p1.x, p2.x);
+  const y = Math.min(p1.y, p2.y);
+  const w = Math.abs(p2.x - p1.x);
+  const h = Math.abs(p2.y - p1.y);
+  rect = { x, y, w, h };
+}
+---
+
+{hasGeo ? (
+  <figure class="map" aria-label={title}>
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      role="img"
+      aria-label={title}
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <rect x="0" y="0" width={W} height={H} class="map-bg" />
+
+      {landPath ? <path d={landPath} class="map-land" /> : null}
+
+      {/* simple graticule */}
+      {[-120, -60, 0, 60, 120].map((lon) => {
+        const p = projection([lon, 0]);
+        const x = p?.[0] ?? lon + 180;
+        return <line x1={x} y1="0" x2={x} y2={H} class="map-grid" />;
+      })}
+      {[-60, -30, 0, 30, 60].map((lat) => {
+        const p = projection([0, lat]);
+        const y = p?.[1] ?? 90 - lat;
+        return <line x1="0" y1={y} x2={W} y2={y} class="map-grid" />;
+      })}
+
+      {rect ? (
+        <rect
+          x={rect.x}
+          y={rect.y}
+          width={rect.w}
+          height={rect.h}
+          rx="3"
+          class="map-region"
+        />
+      ) : null}
+
+      {radius ? (
+        <ellipse
+          cx={radius.cx}
+          cy={radius.cy}
+          rx={radius.rx}
+          ry={radius.ry}
+          class="map-region"
+        />
+      ) : null}
+
+      {dot ? <circle cx={dot.cx} cy={dot.cy} r="2.2" class="map-dot" /> : null}
+    </svg>
+    <figcaption class="muted" style="margin-top: 8px">
+      Approximate modern reference{geo?.note ? ` — ${geo.note}` : ""}.
+      {osmHref ? (
+        <>
+          {" "}
+          <a href={osmHref} class="muted">
+            Open in OpenStreetMap
+          </a>
+          .
+        </>
+      ) : (
+        "."
+      )}
+    </figcaption>
+  </figure>
+) : null}
+

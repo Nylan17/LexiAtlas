@@ -1,0 +1,67 @@
+---
+type Period = {
+  start?: number;
+  end?: number;
+  label?: string;
+};
+
+type Props = {
+  family?: string;
+  branch?: string;
+  region?: string | string[];
+  tags?: string[];
+  period?: Period;
+};
+
+const { family, branch, region, tags, period } = Astro.props as Props;
+
+const regions = Array.isArray(region) ? region : region ? [region] : [];
+
+function fmtYear(y: number) {
+  const abs = Math.abs(Math.trunc(y));
+  if (y < 0) return `${abs} BCE`;
+  return `${abs} CE`;
+}
+
+function fmtRange(p?: Period) {
+  if (!p) return "";
+  if (p.label) return p.label;
+  const s = typeof p.start === "number" ? fmtYear(p.start) : "";
+  const e = typeof p.end === "number" ? fmtYear(p.end) : "";
+  if (s && e) return `${s} → ${e}`;
+  return s || e || "";
+}
+
+const periodText = fmtRange(period);
+const hasAny =
+  !!family ||
+  !!branch ||
+  regions.length > 0 ||
+  (tags?.length ?? 0) > 0 ||
+  !!periodText;
+---
+
+{hasAny ? (
+  <div class="facts" aria-label="At a glance">
+    <div class="facts-row">
+      {family ? <span class="chip">Family: {family}</span> : null}
+      {branch ? <span class="chip">Branch: {branch}</span> : null}
+      {periodText ? <span class="chip">Period: {periodText}</span> : null}
+    </div>
+    {regions.length ? (
+      <div class="facts-row">
+        {regions.map((r) => (
+          <span class="chip">Region: {r}</span>
+        ))}
+      </div>
+    ) : null}
+    {(tags?.length ?? 0) > 0 ? (
+      <div class="facts-row">
+        {tags!.slice(0, 12).map((t) => (
+          <span class="chip chip-muted">{t}</span>
+        ))}
+      </div>
+    ) : null}
+  </div>
+) : null}
+

@@ -1,5 +1,20 @@
 ---
 title: "Црькъвьнословѣньскъ ѩꙁꙑкъ Church Slavonic"
+blurb: "Church Slavonic is the liturgical and literary language of Slavic Orthodox traditions, rooted in early medieval translation and manuscript culture. It’s a practical entry point to medieval Slavic texts and historical linguistics."
+family: "Indo-European"
+branch: "Slavic"
+region:
+  - "Eastern and Southern Europe (liturgical and manuscript traditions)"
+period:
+  label: "c. 860 CE → present (liturgical use continues)"
+  start: 860
+  end: 2025
+geo:
+  center:
+    lat: 45.8
+    lon: 20.5
+  radiusKm: 1400
+  note: "Broad modern-reference region; reflects liturgical transmission rather than a single spoken area."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

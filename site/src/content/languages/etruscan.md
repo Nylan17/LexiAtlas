@@ -1,5 +1,19 @@
 ---
 title: "Etruscan"
+blurb: "Etruscan is the best-attested non-Indo-European language of ancient Italy, known from inscriptions and a handful of longer texts. Studying it sheds light on pre-Roman Italy and the cultural world surrounding early Rome."
+family: "Tyrsenian (proposed)"
+region:
+  - "Central Italy (Etruria) and nearby regions"
+period:
+  label: "c. 700 BCE → 100 BCE (epigraphic tradition)"
+  start: -700
+  end: -100
+geo:
+  center:
+    lat: 42.4
+    lon: 11.6
+  radiusKm: 350
+  note: "Centered on Etruria; attested primarily via inscriptions."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

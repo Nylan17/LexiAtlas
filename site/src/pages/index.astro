@@ -10,12 +10,25 @@ function englishSortKey(title: string): string {
   return (m?.[0] || t).trim().toLowerCase();
 }
 
+function normText(s: unknown): string {
+  return String(s || "").trim().toLowerCase();
+}
+
+function regionTokens(r?: string | string[]) {
+  const arr = Array.isArray(r) ? r : r ? [r] : [];
+  return arr.map((x) => String(x));
+}
+
 const languages = entries
   .filter((e) => e.slug !== "lexicityall-languages" && e.data.title !== "Lexicity/All Languages")
   .map((e) => ({
     title: e.data.title,
     slug: e.slug,
-    sortKey: englishSortKey(e.data.title)
+    sortKey: englishSortKey(e.data.title),
+    family: e.data.family || "",
+    branch: e.data.branch || "",
+    region: regionTokens(e.data.region),
+    tags: e.data.tags || []
   }))
   .sort((a, b) => a.sortKey.localeCompare(b.sortKey) || a.title.localeCompare(b.title));
 
@@ -27,56 +40,152 @@ for (const l of languages) {
   if (!groups.has(key)) groups.set(key, []);
   groups.get(key).push(l);
 }
+
+const familyGroups = new Map<string, typeof languages>();
+for (const l of languages) {
+  const fam = (l.family || "").trim() || "Unknown";
+  if (!familyGroups.has(fam)) familyGroups.set(fam, []);
+  familyGroups.get(fam)!.push(l);
+}
+
+const families = Array.from(familyGroups.keys())
+  .filter((f) => f !== "Unknown")
+  .sort((a, b) => a.localeCompare(b));
+
+const regions = Array.from(
+  new Set(
+    languages
+      .flatMap((l) => l.region)
+      .map((r) => r.trim())
+      .filter(Boolean)
+  )
+).sort((a, b) => a.localeCompare(b));
 ---
 <BaseLayout title="LexiAtlas — Browse">
   <div class="grid">
     <section class="card">
       <div class="card-body">
-        <h1 style="margin:0 0 6px">Browse</h1>
-        <p class="muted" style="margin:0 0 12px">
-          Select a language to view resources. This revival is community-maintained.
-        </p>
-        <p style="margin:0 0 12px">
-          <a href="/search/">Search everything</a>
-        </p>
-        <label class="muted" for="filter">Filter</label>
-        <input id="filter" type="search" placeholder="Type to filter languages…" autocomplete="off" />
-        <div class="muted" id="filterStatus" style="margin-top:10px" aria-live="polite"></div>
+        <div id="browseRoot" data-view="az">
+          <details id="browseDetails" class="browse-details" open>
+            <summary class="browse-summary">
+              <div>
+                <div style="font-weight:750">Browse languages</div>
+                <div class="muted" style="font-size:0.95rem">{languages.length} language page(s)</div>
+              </div>
+            </summary>
 
-        <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
-          {letters.map((c) => (
-            <a class="muted" href={`#${c}`} style="font-family:var(--mono); font-size:0.9rem">{c}</a>
-          ))}
-          <a class="muted" href="#other" style="font-family:var(--mono); font-size:0.9rem">#</a>
-        </div>
+            <p class="muted" style="margin:12px 0 12px">
+              Select a language to view resources. This revival is community-maintained.
+            </p>
+            <p style="margin:0 0 12px">
+              <a href="/search/">Search everything</a>
+            </p>
 
-        <div class="lang-list" style="max-height: 60vh" aria-label="Language list">
-          {letters.map((c) =>
-            (groups.get(c) || []).length ? (
-              <section style="margin-top:12px">
-                <h2 id={c} class="muted" style="margin:10px 0 6px; font-size:0.95rem">{c}</h2>
-                <ul style="margin:0; padding:0; list-style:none">
-                  {(groups.get(c) || []).map((l) => (
-                    <li data-title={l.sortKey}>
-                      <a href={`/language/${l.slug}/`}>{l.title}</a>
-                    </li>
+            <div class="segmented" role="tablist" aria-label="Browse mode">
+              <button type="button" class="seg-btn" data-view="az" aria-selected="true">A–Z</button>
+              <button type="button" class="seg-btn" data-view="family" aria-selected="false">By family</button>
+            </div>
+
+            <div class="facet-grid" aria-label="Filters">
+              <div>
+                <label class="muted" for="filter">Name filter</label>
+                <input id="filter" type="search" placeholder="Type to filter languages…" autocomplete="off" />
+              </div>
+              <div>
+                <label class="muted" for="familyFilter">Family</label>
+                <select id="familyFilter">
+                  <option value="">Any</option>
+                  {families.map((f) => (
+                    <option value={f}>{f}</option>
                   ))}
-                </ul>
-              </section>
-            ) : null
-          )}
-          {(groups.get("#") || []).length ? (
-            <section style="margin-top:12px">
-              <h2 id="other" class="muted" style="margin:10px 0 6px; font-size:0.95rem">Other</h2>
-              <ul style="margin:0; padding:0; list-style:none">
-                {(groups.get("#") || []).map((l) => (
-                  <li data-title={l.sortKey}>
-                    <a href={`/language/${l.slug}/`}>{l.title}</a>
-                  </li>
+                  <option value="Unknown">Unknown</option>
+                </select>
+              </div>
+              <div>
+                <label class="muted" for="regionFilter">Region</label>
+                <select id="regionFilter">
+                  <option value="">Any</option>
+                  {regions.map((r) => (
+                    <option value={r}>{r}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div class="muted" id="filterStatus" style="margin-top:10px" aria-live="polite"></div>
+
+            <div class="jump-row" data-only="az">
+              {letters.map((c) => (
+                <a class="muted" href={`#${c}`} style="font-family:var(--mono); font-size:0.9rem">{c}</a>
+              ))}
+              <a class="muted" href="#other" style="font-family:var(--mono); font-size:0.9rem">#</a>
+            </div>
+
+            <div class="lang-list" style="max-height: 60vh" aria-label="Language list (A–Z)" data-list="az">
+              {letters.map((c) =>
+                (groups.get(c) || []).length ? (
+                  <section class="lang-group" style="margin-top:12px" data-group>
+                    <h2 id={c} class="muted" style="margin:10px 0 6px; font-size:0.95rem">{c}</h2>
+                    <ul style="margin:0; padding:0; list-style:none">
+                      {(groups.get(c) || []).map((l) => (
+                        <li
+                          data-title={l.sortKey}
+                          data-family={normText(l.family) || "unknown"}
+                          data-region={normText(l.region.join(" · "))}
+                        >
+                          <a href={`/language/${l.slug}/`}>{l.title}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                ) : null
+              )}
+              {(groups.get("#") || []).length ? (
+                <section class="lang-group" style="margin-top:12px" data-group>
+                  <h2 id="other" class="muted" style="margin:10px 0 6px; font-size:0.95rem">Other</h2>
+                  <ul style="margin:0; padding:0; list-style:none">
+                    {(groups.get("#") || []).map((l) => (
+                      <li
+                        data-title={l.sortKey}
+                        data-family={normText(l.family) || "unknown"}
+                        data-region={normText(l.region.join(" · "))}
+                      >
+                        <a href={`/language/${l.slug}/`}>{l.title}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ) : null}
+            </div>
+
+            <div class="lang-list" style="max-height: 60vh" aria-label="Language list (by family)" data-list="family">
+              {Array.from(familyGroups.entries())
+                .sort(([a], [b]) => {
+                  if (a === "Unknown") return 1;
+                  if (b === "Unknown") return -1;
+                  return a.localeCompare(b);
+                })
+                .map(([fam, items]) => (
+                  <section class="lang-group" style="margin-top:12px" data-group>
+                    <h2 class="muted" style="margin:10px 0 6px; font-size:0.95rem">{fam}</h2>
+                    <ul style="margin:0; padding:0; list-style:none">
+                      {items
+                        .slice()
+                        .sort((a, b) => a.sortKey.localeCompare(b.sortKey) || a.title.localeCompare(b.title))
+                        .map((l) => (
+                          <li
+                            data-title={l.sortKey}
+                            data-family={normText(l.family) || "unknown"}
+                            data-region={normText(l.region.join(" · "))}
+                          >
+                            <a href={`/language/${l.slug}/`}>{l.title}</a>
+                          </li>
+                        ))}
+                    </ul>
+                  </section>
                 ))}
-              </ul>
-            </section>
-          ) : null}
+            </div>
+          </details>
         </div>
       </div>
     </section>
@@ -103,24 +212,65 @@ for (const l of languages) {
   </div>
 
   <script is:inline>
+    // Mobile: collapse the browse panel by default.
+    try {
+      const details = document.getElementById("browseDetails");
+      if (details && window.matchMedia("(max-width: 900px)").matches) {
+        details.removeAttribute("open");
+      }
+    } catch (_) {}
+
+    // View toggle (A–Z vs By family)
+    const browseRoot = document.getElementById("browseRoot");
+    const segBtns = Array.from(document.querySelectorAll(".seg-btn"));
+    function setView(view) {
+      if (!browseRoot) return;
+      browseRoot.setAttribute("data-view", view);
+      for (const b of segBtns) {
+        const v = b.getAttribute("data-view");
+        const sel = v === view;
+        b.setAttribute("aria-selected", sel ? "true" : "false");
+      }
+    }
+    for (const b of segBtns) {
+      b.addEventListener("click", () => setView(b.getAttribute("data-view") || "az"));
+    }
+
     const input = document.getElementById("filter");
+    const family = document.getElementById("familyFilter");
+    const region = document.getElementById("regionFilter");
     const status = document.getElementById("filterStatus");
     const items = Array.from(document.querySelectorAll("[data-title]"));
+    const groups = Array.from(document.querySelectorAll("[data-group]"));
+
     function update() {
       const q = (input.value || "").trim().toLowerCase();
+      const fam = ((family && family.value) || "").trim().toLowerCase();
+      const reg = ((region && region.value) || "").trim().toLowerCase();
       let shown = 0;
       for (const li of items) {
         const t = li.getAttribute("data-title") || "";
-        const ok = !q || t.includes(q);
+        const lf = li.getAttribute("data-family") || "";
+        const lr = li.getAttribute("data-region") || "";
+        const okQ = !q || t.includes(q);
+        const okF = !fam || lf === fam;
+        const okR = !reg || lr.includes(reg);
+        const ok = okQ && okF && okR;
         li.style.display = ok ? "" : "none";
         if (ok) shown++;
       }
-      status.textContent = q ? `${shown} match(es).` : `${items.length} language(s).`;
+      for (const g of groups) {
+        const any = Array.from(g.querySelectorAll("[data-title]")).some((li) => li.style.display !== "none");
+        g.style.display = any ? "" : "none";
+      }
+      status.textContent = q || fam || reg ? `${shown} match(es).` : `${items.length} language(s).`;
     }
     input.addEventListener("input", () => {
       window.clearTimeout(window.__lexicityFilterT);
       window.__lexicityFilterT = window.setTimeout(update, 80);
     });
+    if (family) family.addEventListener("change", update);
+    if (region) region.addEventListener("change", update);
     update();
   </script>
 </BaseLayout>

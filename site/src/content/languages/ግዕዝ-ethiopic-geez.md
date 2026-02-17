@@ -1,5 +1,20 @@
 ---
 title: "ግዕዝ Ethiopic (Ge'ez)"
+blurb: "Ge’ez is a classical Semitic language of the Horn of Africa, central to Ethiopian and Eritrean liturgical and literary traditions. It’s an excellent choice for readers interested in late antique and medieval Africa and Semitic philology."
+family: "Afroasiatic"
+branch: "Semitic"
+region:
+  - "Horn of Africa (Ethiopia/Eritrea)"
+period:
+  label: "c. 300 CE → present (classical corpus + liturgical use)"
+  start: 300
+  end: 2025
+geo:
+  center:
+    lat: 13.5
+    lon: 39.5
+  radiusKm: 650
+  note: "Centered on the Ethiopian highlands; continued liturgical use."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

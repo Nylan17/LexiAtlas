@@ -1,5 +1,20 @@
 ---
 title: "𒌷𒉌𒅆𒇷 Hittite"
+blurb: "Hittite is the oldest attested Indo-European language, preserved in cuneiform archives from Anatolia. It’s especially valuable for historical linguistics and for studying Bronze Age diplomacy and law."
+family: "Indo-European"
+branch: "Anatolian"
+region:
+  - "Anatolia (modern Turkey)"
+period:
+  label: "c. 1650 BCE → 1200 BCE"
+  start: -1650
+  end: -1200
+geo:
+  center:
+    lat: 40.0
+    lon: 34.6
+  radiusKm: 500
+  note: "Centered on central Anatolia; the Hittite sphere changes over time."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

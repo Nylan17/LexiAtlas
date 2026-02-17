@@ -1,5 +1,20 @@
 ---
 title: "संस्कृतम् Sanskrit"
+blurb: "Sanskrit is a key classical language of South Asia, foundational for Vedic texts, philosophy, epic literature, and grammar. It’s also a rich entry point into Indo-European linguistics and historical philology."
+family: "Indo-European"
+branch: "Indo-Iranian"
+region:
+  - "South Asia (historical and scholarly usage)"
+period:
+  label: "2nd millennium BCE → present (Vedic/classical focus in many resources)"
+  start: -1500
+  end: 2025
+geo:
+  center:
+    lat: 26.8
+    lon: 80.9
+  radiusKm: 1400
+  note: "A broad modern-reference region; usage spans many traditions and centuries."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

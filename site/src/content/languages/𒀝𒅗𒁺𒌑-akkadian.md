@@ -1,5 +1,20 @@
 ---
 title: "𒀝𒅗𒁺𒌑 Akkadian"
+blurb: "Akkadian is the major written language of ancient Mesopotamia, preserved on thousands of cuneiform tablets. Studying it opens direct access to law codes, royal inscriptions, letters, and epics from Assyria and Babylonia."
+family: "Afroasiatic"
+branch: "Semitic"
+region:
+  - "Mesopotamia (modern Iraq and neighboring regions)"
+period:
+  label: "c. 2500 BCE → 100 CE (varies by dialect)"
+  start: -2500
+  end: 100
+geo:
+  center:
+    lat: 33.3
+    lon: 44.4
+  radiusKm: 700
+  note: "Centered on Mesopotamia; usage shifts across periods and dialects."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

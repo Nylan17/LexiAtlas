@@ -1,5 +1,20 @@
 ---
 title: "𓂋𓏺𓈖𓆎𓅓𓏏𓊖 Egyptian"
+blurb: "Ancient Egyptian is attested for millennia in hieroglyphic and related scripts, spanning everything from royal inscriptions to religious and literary texts. It’s a core language for anyone studying ancient Egypt and its long cultural history."
+family: "Afroasiatic"
+branch: "Egyptian"
+region:
+  - "Nile Valley (ancient Egypt)"
+period:
+  label: "c. 3200 BCE → 400 CE (Egyptian stages; later Coptic separately)"
+  start: -3200
+  end: 400
+geo:
+  center:
+    lat: 26.8
+    lon: 31.5
+  radiusKm: 650
+  note: "Centered on the Nile Valley; scripts and language stages change across time."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

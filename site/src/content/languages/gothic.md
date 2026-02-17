@@ -1,5 +1,20 @@
 ---
 title: "Gothic"
+blurb: "Gothic is the earliest substantial record of a Germanic language, best known from the Gothic Bible translation. It’s especially valuable for historical linguistics and for understanding early Germanic sound and morphology."
+family: "Indo-European"
+branch: "Germanic"
+region:
+  - "Eastern Europe and the Roman frontier world (late antiquity)"
+period:
+  label: "c. 300 CE → 600 CE (textual attestation)"
+  start: 300
+  end: 600
+geo:
+  center:
+    lat: 46.5
+    lon: 30.7
+  radiusKm: 900
+  note: "Broad modern-reference region; Gothic groups and texts are not tied to a single fixed area."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

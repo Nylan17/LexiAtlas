@@ -1,5 +1,20 @@
 ---
 title: "ܠܫܢܐ ܣܘܪܝܝܐ Syriac"
+blurb: "Syriac is a major literary language of late antiquity, central to Christian traditions across the Near East. Studying it opens a vast corpus of theology, history, and science in a Semitic language closely related to Aramaic."
+family: "Afroasiatic"
+branch: "Semitic"
+region:
+  - "Mesopotamia and the Levant (late antique and medieval)"
+period:
+  label: "c. 100 CE → present (classical Syriac + ongoing liturgical use)"
+  start: 100
+  end: 2025
+geo:
+  center:
+    lat: 36.2
+    lon: 37.2
+  radiusKm: 900
+  note: "Broad modern-reference region; Syriac communities and centers shift across centuries."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

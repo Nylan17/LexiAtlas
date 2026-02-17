@@ -1,5 +1,19 @@
 ---
 title: "Elamite"
+blurb: "Elamite is an ancient language of southwestern Iran, attested in inscriptions and administrative texts across multiple periods. It’s a great choice if you want to read primary sources from the Elamite and Persian imperial worlds."
+family: "Unclassified (possibly isolate)"
+region:
+  - "Southwestern Iran (Elam/Susa and neighboring regions)"
+period:
+  label: "c. 2600 BCE → 330 BCE (varies by stage)"
+  start: -2600
+  end: -330
+geo:
+  center:
+    lat: 32.2
+    lon: 48.3
+  radiusKm: 500
+  note: "Centered on Susiana/Elam; attestations span multiple stages and scripts."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

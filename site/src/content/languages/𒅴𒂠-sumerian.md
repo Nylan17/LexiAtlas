@@ -1,5 +1,19 @@
 ---
 title: "𒅴𒂠 Sumerian"
+blurb: "Sumerian is the earliest extensively attested written language, recorded in cuneiform in ancient Mesopotamia. It’s foundational for studying early cities, administration, and literature like hymns and myths."
+family: "Language isolate"
+region:
+  - "Southern Mesopotamia (modern southern Iraq)"
+period:
+  label: "c. 3100 BCE → 1st millennium BCE (as a literary/learned language)"
+  start: -3100
+  end: -500
+geo:
+  center:
+    lat: 31.0
+    lon: 46.0
+  radiusKm: 450
+  note: "Centered on southern Mesopotamia; later used widely as a learned language."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

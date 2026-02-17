@@ -1,5 +1,20 @@
 ---
 title: "Ugaritic"
+blurb: "Ugaritic is a Northwest Semitic language written in a distinctive alphabetic cuneiform script. It’s especially rewarding if you’re interested in Late Bronze Age Syria, Semitic comparative linguistics, and ancient Near Eastern texts."
+family: "Afroasiatic"
+branch: "Semitic"
+region:
+  - "Levant (Ugarit/Ras Shamra, modern Syria)"
+period:
+  label: "c. 1400 BCE → 1200 BCE"
+  start: -1400
+  end: -1200
+geo:
+  center:
+    lat: 35.6
+    lon: 35.8
+  radiusKm: 180
+  note: "Centered on Ugarit; attested mainly in Late Bronze Age archives."
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---
