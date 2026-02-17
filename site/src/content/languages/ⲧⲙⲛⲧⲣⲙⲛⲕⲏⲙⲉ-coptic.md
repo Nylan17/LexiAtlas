@@ -5,6 +5,8 @@ family: "Afroasiatic"
 branch: "Egyptian"
 region:
   - "Egypt (late antique and medieval)"
+regionGroup:
+  - "North Africa"
 period:
   label: "c. 200 CE → present (liturgical use continues)"
   start: 200

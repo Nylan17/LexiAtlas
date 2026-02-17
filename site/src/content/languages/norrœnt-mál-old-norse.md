@@ -5,6 +5,8 @@ family: "Indo-European"
 branch: "Germanic"
 region:
   - "Scandinavia and the North Atlantic (medieval)"
+regionGroup:
+  - "Europe"
 period:
   label: "c. 700 CE → 1400 CE (varies by dialect and corpus)"
   start: 700

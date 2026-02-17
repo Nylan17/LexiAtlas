@@ -12,6 +12,8 @@ const languages = defineCollection({
     family: z.string().optional(),
     branch: z.string().optional(),
     region: z.union([z.string(), z.array(z.string())]).optional(),
+    // Coarse region used for browsing facets (e.g., "Europe", "Middle East").
+    regionGroup: z.union([z.string(), z.array(z.string())]).optional(),
     // Approximate period of use/activity. Use negative years for BCE (e.g., -1200).
     period: z
       .object({

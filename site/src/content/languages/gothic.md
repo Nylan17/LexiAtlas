@@ -5,6 +5,8 @@ family: "Indo-European"
 branch: "Germanic"
 region:
   - "Eastern Europe and the Roman frontier world (late antiquity)"
+regionGroup:
+  - "Europe"
 period:
   label: "c. 300 CE → 600 CE (textual attestation)"
   start: 300

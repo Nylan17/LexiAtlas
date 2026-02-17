@@ -5,6 +5,8 @@ family: "Afroasiatic"
 branch: "Semitic"
 region:
   - "Levant and Mesopotamia (and beyond, historically)"
+regionGroup:
+  - "Middle East"
 period:
   label: "c. 1000 BCE → present (many Aramaic languages and stages)"
   start: -1000

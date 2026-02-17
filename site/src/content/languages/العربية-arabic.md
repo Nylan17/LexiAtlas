@@ -5,6 +5,9 @@ family: "Afroasiatic"
 branch: "Semitic"
 region:
   - "Arabian Peninsula and the wider Arabic-speaking world"
+regionGroup:
+  - "Middle East"
+  - "North Africa"
 period:
   label: "c. 400 CE → present (classical focus in many resources)"
   start: 400

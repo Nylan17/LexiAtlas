@@ -5,6 +5,8 @@ family: "Afroasiatic"
 branch: "Semitic"
 region:
   - "Mesopotamia (modern Iraq and neighboring regions)"
+regionGroup:
+  - "Middle East"
 period:
   label: "c. 2500 BCE → 100 CE (varies by dialect)"
   start: -2500

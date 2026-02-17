@@ -5,6 +5,8 @@ family: "Afroasiatic"
 branch: "Egyptian"
 region:
   - "Nile Valley (ancient Egypt)"
+regionGroup:
+  - "North Africa"
 period:
   label: "c. 3200 BCE → 400 CE (Egyptian stages; later Coptic separately)"
   start: -3200

@@ -4,6 +4,8 @@ blurb: "Old Turkic refers to early Turkic texts such as the Orkhon inscriptions 
 family: "Turkic"
 region:
   - "Inner Asia (Mongolia and Central Asia)"
+regionGroup:
+  - "Central Asia"
 period:
   label: "c. 700 CE → 1100 CE (major inscriptional and manuscript corpora)"
   start: 700

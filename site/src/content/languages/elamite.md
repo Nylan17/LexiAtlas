@@ -4,6 +4,8 @@ blurb: "Elamite is an ancient language of southwestern Iran, attested in inscrip
 family: "Unclassified (possibly isolate)"
 region:
   - "Southwestern Iran (Elam/Susa and neighboring regions)"
+regionGroup:
+  - "Middle East"
 period:
   label: "c. 2600 BCE → 330 BCE (varies by stage)"
   start: -2600

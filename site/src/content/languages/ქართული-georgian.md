@@ -4,6 +4,8 @@ blurb: "Georgian has a long written tradition and is a key language of the Cauca
 family: "Kartvelian"
 region:
   - "Caucasus (Georgia and surrounding regions)"
+regionGroup:
+  - "Caucasus"
 period:
   label: "5th century CE → present (written tradition)"
   start: 430

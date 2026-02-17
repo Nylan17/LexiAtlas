@@ -9,6 +9,8 @@ family: "Japonic"
 branch: "Japanese"
 region:
   - "Japan"
+regionGroup:
+  - "East Asia"
 period:
   label: "Heian-based written standard → early 20th century (pre-modern written Japanese)"
   start: 800

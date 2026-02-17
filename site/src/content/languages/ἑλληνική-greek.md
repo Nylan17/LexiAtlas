@@ -5,6 +5,8 @@ family: "Indo-European"
 branch: "Hellenic"
 region:
   - "Aegean and Eastern Mediterranean"
+regionGroup:
+  - "Europe"
 period:
   label: "c. 1500 BCE → present (many stages; resources often focus on ancient/Koine)"
   start: -1500

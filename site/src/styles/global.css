@@ -154,6 +154,45 @@ a:hover { text-decoration: underline; }
   flex-wrap: wrap;
 }
 
+.welcome-panels {
+  margin-top: 16px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 901px) {
+  .welcome-panels {
+    grid-template-columns: 1.4fr 0.6fr;
+    align-items: start;
+  }
+}
+
+.mini-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 90%, var(--bg));
+  overflow: hidden;
+}
+
+.mini-head {
+  padding: 12px 12px 10px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel) 86%, var(--bg));
+}
+
+.mini-title {
+  font-weight: 750;
+}
+
+.mini-body {
+  padding: 12px;
+}
+
 .browse-details {
   border-radius: 10px;
 }

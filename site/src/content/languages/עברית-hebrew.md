@@ -5,6 +5,8 @@ family: "Afroasiatic"
 branch: "Semitic"
 region:
   - "Levant (modern Israel/Palestine and surrounding regions)"
+regionGroup:
+  - "Middle East"
 period:
   label: "1st millennium BCE → present (biblical/classical focus in many resources)"
   start: -1000

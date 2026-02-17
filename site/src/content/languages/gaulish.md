@@ -5,6 +5,8 @@ family: "Indo-European"
 branch: "Celtic"
 region:
   - "Gaul (modern France and neighboring regions)"
+regionGroup:
+  - "Europe"
 period:
   label: "c. 300 BCE → 500 CE (fragmentary attestation)"
   start: -300

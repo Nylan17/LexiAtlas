@@ -5,6 +5,8 @@ family: "Indo-European"
 branch: "Slavic"
 region:
   - "Eastern and Southern Europe (liturgical and manuscript traditions)"
+regionGroup:
+  - "Europe"
 period:
   label: "c. 860 CE → present (liturgical use continues)"
   start: 860

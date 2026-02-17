@@ -5,6 +5,8 @@ family: "Afroasiatic"
 branch: "Semitic"
 region:
   - "Mesopotamia and the Levant (late antique and medieval)"
+regionGroup:
+  - "Middle East"
 period:
   label: "c. 100 CE → present (classical Syriac + ongoing liturgical use)"
   start: 100

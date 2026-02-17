@@ -5,6 +5,8 @@ family: "Sino-Tibetan"
 branch: "Sinitic"
 region:
   - "North China Plain and early Chinese states"
+regionGroup:
+  - "East Asia"
 period:
   label: "c. 1250 BCE → 200 CE (Shang to Han; broad period label)"
   start: -1250

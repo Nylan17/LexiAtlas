@@ -4,6 +4,8 @@ blurb: "“Mayan” refers to a family of languages of Mesoamerica, including bo
 family: "Mayan"
 region:
   - "Mesoamerica (southern Mexico, Guatemala, Belize, and nearby areas)"
+regionGroup:
+  - "Americas"
 period:
   label: "c. 1000 BCE → present (family; classical inscriptions peak 250–900 CE)"
   start: -1000

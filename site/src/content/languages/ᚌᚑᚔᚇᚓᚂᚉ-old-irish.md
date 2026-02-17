@@ -5,6 +5,8 @@ family: "Indo-European"
 branch: "Celtic"
 region:
   - "Ireland (early medieval)"
+regionGroup:
+  - "Europe"
 period:
   label: "c. 600 CE → 900 CE (main written record)"
   start: 600

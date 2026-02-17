@@ -5,6 +5,8 @@ family: "Indo-European"
 branch: "Romance"
 region:
   - "Northern France (medieval)"
+regionGroup:
+  - "Europe"
 period:
   label: "c. 800 CE → 1400 CE"
   start: 800

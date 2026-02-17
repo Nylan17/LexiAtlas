@@ -4,6 +4,8 @@ blurb: "Etruscan is the best-attested non-Indo-European language of ancient Ital
 family: "Tyrsenian (proposed)"
 region:
   - "Central Italy (Etruria) and nearby regions"
+regionGroup:
+  - "Europe"
 period:
   label: "c. 700 BCE → 100 BCE (epigraphic tradition)"
   start: -700

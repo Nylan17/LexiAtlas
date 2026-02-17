@@ -5,6 +5,8 @@ family: "Indo-European"
 branch: "Anatolian"
 region:
   - "Anatolia (modern Turkey)"
+regionGroup:
+  - "Middle East"
 period:
   label: "c. 1650 BCE → 1200 BCE"
   start: -1650

@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import LocatorMap from "../components/LocatorMap.astro";
+import { WHATS_NEW } from "../lib/whatsNew";
 
 const entries = await getCollection("languages");
 function englishSortKey(title: string): string {
@@ -28,9 +30,19 @@ const languages = entries
     family: e.data.family || "",
     branch: e.data.branch || "",
     region: regionTokens(e.data.region),
-    tags: e.data.tags || []
+    regionGroup: regionTokens(e.data.regionGroup),
+    tags: e.data.tags || [],
+    blurb: e.data.blurb || "",
+    period: e.data.period,
+    geo: e.data.geo
   }))
   .sort((a, b) => a.sortKey.localeCompare(b.sortKey) || a.title.localeCompare(b.title));
+
+// Featured language: deterministic rotation so the site feels “alive” without a backend.
+const day = Math.floor(Date.now() / 86400000);
+const featuredPool = languages.filter((l) => (l.blurb || "").trim());
+const pool = featuredPool.length ? featuredPool : languages;
+const featured = pool.length ? pool[day % pool.length] : null;
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const groups = new Map();
@@ -55,7 +67,7 @@ const families = Array.from(familyGroups.keys())
 const regions = Array.from(
   new Set(
     languages
-      .flatMap((l) => l.region)
+      .flatMap((l) => (l.regionGroup?.length ? l.regionGroup : ["Uncategorized"]))
       .map((r) => r.trim())
       .filter(Boolean)
   )
@@ -132,7 +144,7 @@ const regions = Array.from(
                           data-title={l.sortKey}
                           data-slug={l.slug}
                           data-family={normText(l.family) || "unknown"}
-                          data-region={normText(l.region.join(" · "))}
+                          data-region={normText((l.regionGroup?.length ? l.regionGroup : ["Uncategorized"]).join(" · "))}
                         >
                           <a href={`/language/${l.slug}/`}>{l.title}</a>
                         </li>
@@ -150,7 +162,7 @@ const regions = Array.from(
                         data-title={l.sortKey}
                         data-slug={l.slug}
                         data-family={normText(l.family) || "unknown"}
-                        data-region={normText(l.region.join(" · "))}
+                        data-region={normText((l.regionGroup?.length ? l.regionGroup : ["Uncategorized"]).join(" · "))}
                       >
                         <a href={`/language/${l.slug}/`}>{l.title}</a>
                       </li>
@@ -179,7 +191,7 @@ const regions = Array.from(
                             data-title={l.sortKey}
                             data-slug={l.slug}
                             data-family={normText(l.family) || "unknown"}
-                            data-region={normText(l.region.join(" · "))}
+                            data-region={normText((l.regionGroup?.length ? l.regionGroup : ["Uncategorized"]).join(" · "))}
                           >
                             <a href={`/language/${l.slug}/`}>{l.title}</a>
                           </li>
@@ -208,6 +220,55 @@ const regions = Array.from(
           Start by choosing a language on the left, or try <a href="/search/">Search</a>.
           If you notice a broken/outdated link, use <a href="/contribute/">Contribute</a>.
         </p>
+
+        <div class="welcome-panels" aria-label="Highlights">
+          {featured ? (
+            <section class="mini-card" aria-label="Featured language">
+              <div class="mini-head">
+                <div class="mini-title">Featured language</div>
+                <div class="muted" style="font-size:0.95rem">Rotates daily</div>
+              </div>
+              <div class="mini-body">
+                <div style="display:flex; gap:14px; align-items:flex-start; flex-wrap:wrap">
+                  <div style="flex: 1 1 280px">
+                    <div style="font-weight:750; font-size:1.05rem">
+                      <a href={`/language/${featured.slug}/`}>{featured.title}</a>
+                    </div>
+                    {featured.blurb ? <p class="muted" style="margin:6px 0 0">{featured.blurb}</p> : null}
+                    <div class="facts-row" style="margin-top:10px">
+                      {featured.family ? <span class="chip">Family: {featured.family}</span> : null}
+                      {featured.branch ? <span class="chip">Branch: {featured.branch}</span> : null}
+                    </div>
+                  </div>
+                  <div style="flex: 0 1 260px; min-width: 220px">
+                    <LocatorMap geo={featured.geo} title={`Featured: ${featured.title}`} showCaption={false} />
+                  </div>
+                </div>
+              </div>
+            </section>
+          ) : null}
+
+          <section class="mini-card" aria-label="What’s new">
+            <div class="mini-head">
+              <div class="mini-title">What’s new</div>
+            </div>
+            <div class="mini-body">
+              {(WHATS_NEW?.length ?? 0) > 0 ? (
+                <ul style="margin: 0; padding-left: 18px">
+                  {WHATS_NEW.slice(0, 4).map((i) => (
+                    <li style="margin: 6px 0">
+                      {i.href ? <a href={i.href}>{i.text}</a> : i.text}
+                      {i.date ? <span class="muted"> · {i.date}</span> : null}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="muted" style="margin:0">No recent updates yet.</p>
+              )}
+            </div>
+          </section>
+        </div>
+
         <hr />
         <p class="muted">Imported language pages: {languages.length}.</p>
       </div>

@@ -5,6 +5,8 @@ family: "Indo-European"
 branch: "Italic"
 region:
   - "Italy and the Roman Mediterranean"
+regionGroup:
+  - "Europe"
 period:
   label: "c. 700 BCE → present (classical + medieval focus in many resources)"
   start: -700

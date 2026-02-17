@@ -5,6 +5,8 @@ family: "Afroasiatic"
 branch: "Semitic"
 region:
   - "Horn of Africa (Ethiopia/Eritrea)"
+regionGroup:
+  - "East Africa"
 period:
   label: "c. 300 CE → present (classical corpus + liturgical use)"
   start: 300

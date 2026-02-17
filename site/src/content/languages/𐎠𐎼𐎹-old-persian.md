@@ -5,6 +5,8 @@ family: "Indo-European"
 branch: "Indo-Iranian"
 region:
   - "Iran and the Achaemenid Empire"
+regionGroup:
+  - "Middle East"
 period:
   label: "c. 520 BCE → 330 BCE (royal inscriptional corpus)"
   start: -520

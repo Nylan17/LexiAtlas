@@ -9,9 +9,10 @@ type Geo = {
 type Props = {
   geo?: Geo;
   title?: string;
+  showCaption?: boolean;
 };
 
-const { geo, title = "Approximate location" } = Astro.props as Props;
+const { geo, title = "Approximate location", showCaption = true } = Astro.props as Props;
 
 const W = 360;
 const H = 180;
@@ -144,20 +145,22 @@ if (geo?.bbox) {
 
       {dot ? <circle cx={dot.cx} cy={dot.cy} r="2.2" class="map-dot" /> : null}
     </svg>
-    <figcaption class="muted" style="margin-top: 8px">
-      Approximate modern reference{geo?.note ? ` — ${geo.note}` : ""}.
-      {osmHref ? (
-        <>
-          {" "}
-          <a href={osmHref} class="muted">
-            Open in OpenStreetMap
-          </a>
-          .
-        </>
-      ) : (
-        "."
-      )}
-    </figcaption>
+    {showCaption ? (
+      <figcaption class="muted" style="margin-top: 8px">
+        Approximate modern reference{geo?.note ? ` — ${geo.note}` : ""}.
+        {osmHref ? (
+          <>
+            {" "}
+            <a href={osmHref} class="muted">
+              Open in OpenStreetMap
+            </a>
+            .
+          </>
+        ) : (
+          "."
+        )}
+      </figcaption>
+    ) : null}
   </figure>
 ) : null}
 

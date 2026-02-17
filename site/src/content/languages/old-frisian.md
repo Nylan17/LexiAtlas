@@ -5,6 +5,8 @@ family: "Indo-European"
 branch: "Germanic"
 region:
   - "Frisia (North Sea coast of the Netherlands and Germany, medieval)"
+regionGroup:
+  - "Europe"
 period:
   label: "c. 1200 CE → 1550 CE (main written record)"
   start: 1200

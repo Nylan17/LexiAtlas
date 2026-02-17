@@ -5,6 +5,8 @@ family: "Afroasiatic"
 branch: "Semitic"
 region:
   - "Levant (Ugarit/Ras Shamra, modern Syria)"
+regionGroup:
+  - "Middle East"
 period:
   label: "c. 1400 BCE → 1200 BCE"
   start: -1400

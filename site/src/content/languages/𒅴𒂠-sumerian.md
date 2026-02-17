@@ -4,6 +4,8 @@ blurb: "Sumerian is the earliest extensively attested written language, recorded
 family: "Language isolate"
 region:
   - "Southern Mesopotamia (modern southern Iraq)"
+regionGroup:
+  - "Middle East"
 period:
   label: "c. 3100 BCE → 1st millennium BCE (as a literary/learned language)"
   start: -3100

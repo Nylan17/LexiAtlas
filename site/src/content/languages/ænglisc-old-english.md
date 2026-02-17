@@ -5,6 +5,8 @@ family: "Indo-European"
 branch: "Germanic"
 region:
   - "England (early medieval)"
+regionGroup:
+  - "Europe"
 period:
   label: "c. 500 CE → 1100 CE"
   start: 500

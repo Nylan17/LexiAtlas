@@ -5,6 +5,8 @@ family: "Indo-European"
 branch: "Indo-Iranian"
 region:
   - "South Asia (historical and scholarly usage)"
+regionGroup:
+  - "South Asia"
 period:
   label: "2nd millennium BCE → present (Vedic/classical focus in many resources)"
   start: -1500
