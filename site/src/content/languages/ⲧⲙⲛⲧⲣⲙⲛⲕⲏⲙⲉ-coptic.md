@@ -15,6 +15,31 @@ geo:
     lon: 31.2
   radiusKm: 650
   note: "Centered on Egypt; many texts are from late antiquity with ongoing liturgical use."
+typing:
+  note: "Coptic is commonly typed with a Greek keyboard plus extra Coptic letters (fonts/keyboard layouts vary by OS). Copy/paste also works well for occasional characters."
+  links:
+    - label: "Unicode block: Coptic"
+      url: "https://unicode.org/charts/PDF/U2C80.pdf"
+  palette:
+    - "ⲁ"
+    - "ⲃ"
+    - "ⲅ"
+    - "ⲇ"
+    - "ⲉ"
+    - "ⲏ"
+    - "ⲑ"
+    - "ⲓ"
+    - "ⲕ"
+    - "ⲗ"
+    - "ⲙ"
+    - "ⲛ"
+    - "ⲟ"
+    - "ⲡ"
+    - "ⲣ"
+    - "ⲥ"
+    - "ⲧ"
+    - "ⲩ"
+    - "ⲱ"
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

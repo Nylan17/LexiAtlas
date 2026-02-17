@@ -14,6 +14,18 @@ geo:
     lon: 46.0
   radiusKm: 450
   note: "Centered on southern Mesopotamia; later used widely as a learned language."
+typing:
+  note: "Cuneiform is typically handled via copy/paste or sign lists rather than everyday typing."
+  links:
+    - label: "Unicode block: Cuneiform"
+      url: "https://unicode.org/charts/PDF/U12000.pdf"
+    - label: "ORACC sign list (browse signs)"
+      url: "https://oracc.museum.upenn.edu/ogsl/"
+  palette:
+    - "𒅴𒂠"
+    - "𒀭"
+    - "𒈗"
+    - "𒆠"
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

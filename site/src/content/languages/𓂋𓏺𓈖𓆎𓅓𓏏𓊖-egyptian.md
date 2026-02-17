@@ -15,6 +15,17 @@ geo:
     lon: 31.5
   radiusKm: 650
   note: "Centered on the Nile Valley; scripts and language stages change across time."
+typing:
+  note: "Egyptian hieroglyphs are best handled with dedicated tools; most learners rely on copy/paste or transliteration schemes rather than typing glyphs."
+  links:
+    - label: "Unicode block: Egyptian Hieroglyphs"
+      url: "https://unicode.org/charts/PDF/U13000.pdf"
+  palette:
+    - "𓂋"
+    - "𓈖"
+    - "𓇋"
+    - "𓏏"
+    - "𓊖"
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

@@ -130,6 +130,7 @@ const regions = Array.from(
                       {(groups.get(c) || []).map((l) => (
                         <li
                           data-title={l.sortKey}
+                          data-slug={l.slug}
                           data-family={normText(l.family) || "unknown"}
                           data-region={normText(l.region.join(" · "))}
                         >
@@ -147,6 +148,7 @@ const regions = Array.from(
                     {(groups.get("#") || []).map((l) => (
                       <li
                         data-title={l.sortKey}
+                        data-slug={l.slug}
                         data-family={normText(l.family) || "unknown"}
                         data-region={normText(l.region.join(" · "))}
                       >
@@ -175,6 +177,7 @@ const regions = Array.from(
                         .map((l) => (
                           <li
                             data-title={l.sortKey}
+                            data-slug={l.slug}
                             data-family={normText(l.family) || "unknown"}
                             data-region={normText(l.region.join(" · "))}
                           >
@@ -242,12 +245,13 @@ const regions = Array.from(
     const status = document.getElementById("filterStatus");
     const items = Array.from(document.querySelectorAll("[data-title]"));
     const groups = Array.from(document.querySelectorAll("[data-group]"));
+    const totalUnique = new Set(items.map((li) => li.getAttribute("data-slug") || "")).size;
 
     function update() {
       const q = (input.value || "").trim().toLowerCase();
       const fam = ((family && family.value) || "").trim().toLowerCase();
       const reg = ((region && region.value) || "").trim().toLowerCase();
-      let shown = 0;
+      const shownUnique = new Set();
       for (const li of items) {
         const t = li.getAttribute("data-title") || "";
         const lf = li.getAttribute("data-family") || "";
@@ -257,13 +261,13 @@ const regions = Array.from(
         const okR = !reg || lr.includes(reg);
         const ok = okQ && okF && okR;
         li.style.display = ok ? "" : "none";
-        if (ok) shown++;
+        if (ok) shownUnique.add(li.getAttribute("data-slug") || "");
       }
       for (const g of groups) {
         const any = Array.from(g.querySelectorAll("[data-title]")).some((li) => li.style.display !== "none");
         g.style.display = any ? "" : "none";
       }
-      status.textContent = q || fam || reg ? `${shown} match(es).` : `${items.length} language(s).`;
+      status.textContent = q || fam || reg ? `${shownUnique.size} match(es).` : `${totalUnique} language(s).`;
     }
     input.addEventListener("input", () => {
       window.clearTimeout(window.__lexicityFilterT);

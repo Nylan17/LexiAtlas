@@ -15,6 +15,34 @@ geo:
     lon: 23.7
   radiusKm: 1100
   note: "Centered on the Aegean; varieties and historical centers change across time."
+typing:
+  note: "Greek is easiest to type with a Greek keyboard layout; for occasional use, copy/paste works well."
+  links:
+    - label: "Unicode block: Greek and Coptic"
+      url: "https://unicode.org/charts/PDF/U0370.pdf"
+  palette:
+    - "α"
+    - "β"
+    - "γ"
+    - "δ"
+    - "ε"
+    - "η"
+    - "θ"
+    - "ι"
+    - "κ"
+    - "λ"
+    - "μ"
+    - "ν"
+    - "ο"
+    - "π"
+    - "ρ"
+    - "σ"
+    - "τ"
+    - "υ"
+    - "φ"
+    - "χ"
+    - "ψ"
+    - "ω"
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

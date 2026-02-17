@@ -40,6 +40,61 @@ body {
 a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+.link-button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.chip-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip-link:hover {
+  text-decoration: none;
+  background: color-mix(in srgb, var(--panel) 70%, var(--bg));
+}
+
+.related-block {
+  margin-top: 10px;
+}
+
+.typing-block {
+  margin-top: 10px;
+}
+
+.palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 0;
+}
+
+.pal-btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel) 88%, var(--bg));
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+}
+
+.pal-btn:hover {
+  background: color-mix(in srgb, var(--panel) 72%, var(--bg));
+}
+
+.pal-btn.copied {
+  outline: 2px solid color-mix(in srgb, var(--link) 60%, transparent);
+}
+
 .external-link {
   text-underline-offset: 2px;
 }
@@ -343,6 +398,31 @@ input[type="search"] {
 .prose h1, .prose h2, .prose h3, .prose h4 {
   line-height: 1.2;
   margin: 1.2em 0 0.5em;
+}
+
+@media print {
+  .topbar,
+  .skip-link,
+  .browse-details,
+  #printBtn {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .card {
+    box-shadow: none;
+    border: 0;
+  }
+  .container {
+    max-width: none;
+    padding: 0;
+  }
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
 }
 
 .prose h1 { font-size: 1.65rem; }

@@ -15,6 +15,20 @@ geo:
     lon: 44.4
   radiusKm: 700
   note: "Centered on Mesopotamia; usage shifts across periods and dialects."
+typing:
+  note: "Cuneiform input is usually done by copy/paste or with dedicated tools. Many learners rely on sign lists rather than typing directly."
+  links:
+    - label: "Unicode block: Cuneiform"
+      url: "https://unicode.org/charts/PDF/U12000.pdf"
+    - label: "ORACC sign list (browse signs)"
+      url: "https://oracc.museum.upenn.edu/ogsl/"
+  palette:
+    - "𒀝𒅗𒁺𒌑"
+    - "𒀭"
+    - "𒈗"
+    - "𒆠"
+    - "𒉺"
+    - "𒌋"
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

@@ -36,6 +36,22 @@ const languages = defineCollection({
         note: z.string().optional()
       })
       .optional(),
+    typing: z
+      .object({
+        note: z.string().optional(),
+        // External links to IMEs, fonts, and input help.
+        links: z
+          .array(
+            z.object({
+              label: z.string(),
+              url: z.string()
+            })
+          )
+          .optional(),
+        // Copy/paste palette (characters or short strings).
+        palette: z.array(z.string()).optional()
+      })
+      .optional(),
     source: z.string().optional(),
     attribution: z.string().optional()
   })

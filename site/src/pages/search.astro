@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const isDev = import.meta.env.DEV;
 ---
 <BaseLayout title="Search — LexiAtlas">
   <div class="card">
@@ -8,6 +10,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <p class="muted" style="margin-top:-6px">
         Search across languages and resource pages. If you don’t see what you expect, try a shorter query or browse from the home page.
       </p>
+      {isDev ? (
+        <p class="muted" style="margin-top:-6px">
+          Local note: search index is generated at build time. To test search locally, run{" "}
+          <code>npm run build:pages</code> then <code>npm run preview</code>.
+        </p>
+      ) : null}
 
       <label for="q">Query</label>
       <input id="q" type="search" placeholder="Search languages and pages…" autocomplete="off" />
@@ -17,7 +25,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </div>
 
-  <script is:inline>
+  <script is:inline type="module">
+    const IS_DEV = ${isDev ? "true" : "false"};
     const q = document.getElementById("q");
     const resultsEl = document.getElementById("results");
     const statusEl = document.getElementById("status");
@@ -25,6 +34,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     let pagefind = null;
     async function loadPagefind() {
       if (pagefind) return pagefind;
+      if (IS_DEV) {
+        throw new Error("Search index not available in dev mode");
+      }
       // Generated at deploy/build time.
       const mod = await import("/pagefind/pagefind.js");
       pagefind = mod;
@@ -75,7 +87,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         }
       } catch (e) {
         console.error(e);
-        setStatus("Search is temporarily unavailable. You can still browse languages from the home page.");
+        if (IS_DEV) {
+          setStatus("Search index isn’t available in dev mode. Run build+preview to test search locally.");
+        } else {
+          setStatus("Search is temporarily unavailable. You can still browse languages from the home page.");
+        }
       }
     }
 

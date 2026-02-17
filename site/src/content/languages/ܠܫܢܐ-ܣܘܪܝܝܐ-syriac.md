@@ -15,6 +15,34 @@ geo:
     lon: 37.2
   radiusKm: 900
   note: "Broad modern-reference region; Syriac communities and centers shift across centuries."
+typing:
+  note: "Syriac is easiest to type with a Syriac keyboard layout/font; for occasional characters, copy/paste works well."
+  links:
+    - label: "Unicode block: Syriac"
+      url: "https://unicode.org/charts/PDF/U0700.pdf"
+  palette:
+    - "ܐ"
+    - "ܒ"
+    - "ܓ"
+    - "ܕ"
+    - "ܗ"
+    - "ܘ"
+    - "ܙ"
+    - "ܚ"
+    - "ܛ"
+    - "ܝ"
+    - "ܟ"
+    - "ܠ"
+    - "ܡ"
+    - "ܢ"
+    - "ܣ"
+    - "ܥ"
+    - "ܦ"
+    - "ܨ"
+    - "ܩ"
+    - "ܪ"
+    - "ܫ"
+    - "ܬ"
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

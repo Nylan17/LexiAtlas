@@ -15,6 +15,26 @@ geo:
     lon: 39.5
   radiusKm: 650
   note: "Centered on the Ethiopian highlands; continued liturgical use."
+typing:
+  note: "Ge’ez (Ethiopic) characters are easiest to input with an Ethiopic keyboard layout or by copy/paste for occasional use."
+  links:
+    - label: "Unicode block: Ethiopic"
+      url: "https://unicode.org/charts/PDF/U1200.pdf"
+  palette:
+    - "ሀ"
+    - "ለ"
+    - "መ"
+    - "ሠ"
+    - "ረ"
+    - "ሰ"
+    - "ቀ"
+    - "በ"
+    - "ተ"
+    - "ነ"
+    - "አ"
+    - "ወ"
+    - "ዘ"
+    - "ገ"
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

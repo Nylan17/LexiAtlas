@@ -15,6 +15,34 @@ geo:
     lon: 35.2
   radiusKm: 650
   note: "Centered on the Levant; the textual tradition spans many centuries and communities."
+typing:
+  note: "Hebrew is easy to type with a Hebrew keyboard layout; for occasional use, copy/paste is often enough."
+  links:
+    - label: "Unicode block: Hebrew"
+      url: "https://unicode.org/charts/PDF/U0590.pdf"
+  palette:
+    - "א"
+    - "ב"
+    - "ג"
+    - "ד"
+    - "ה"
+    - "ו"
+    - "ז"
+    - "ח"
+    - "ט"
+    - "י"
+    - "כ"
+    - "ל"
+    - "מ"
+    - "נ"
+    - "ס"
+    - "ע"
+    - "פ"
+    - "צ"
+    - "ק"
+    - "ר"
+    - "ש"
+    - "ת"
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

@@ -15,6 +15,17 @@ geo:
     lon: 52.9
   radiusKm: 700
   note: "Centered on Persis/Persepolis; mainly attested in royal inscriptions."
+typing:
+  note: "Old Persian cuneiform is usually entered by copy/paste from charts or sign lists."
+  links:
+    - label: "Unicode block: Old Persian"
+      url: "https://unicode.org/charts/PDF/U103A0.pdf"
+  palette:
+    - "𐎠"
+    - "𐎼"
+    - "𐎹"
+    - "𐏐"
+    - "𐏑"
 source: "Imported from archival snapshot (ODT bootstrap)"
 attribution: "Original Lexicity creator (unknown/verify)"
 ---

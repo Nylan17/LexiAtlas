@@ -1,0 +1,58 @@
+---
+type Link = { label: string; url: string };
+type Props = {
+  typing?: {
+    note?: string;
+    links?: Link[];
+    palette?: string[];
+  };
+};
+
+const { typing } = Astro.props as Props;
+const has = !!typing?.note || (typing?.links?.length ?? 0) > 0 || (typing?.palette?.length ?? 0) > 0;
+---
+
+{has ? (
+  <section class="typing-block" aria-label="Typing help">
+    <h2 style="margin-top: 18px">Typing help</h2>
+    {typing?.note ? <p class="muted" style="margin-top:-6px">{typing.note}</p> : null}
+    {(typing?.links?.length ?? 0) > 0 ? (
+      <ul>
+        {typing!.links!.map((l) => (
+          <li>
+            <a href={l.url}>{l.label}</a>
+          </li>
+        ))}
+      </ul>
+    ) : null}
+    {(typing?.palette?.length ?? 0) > 0 ? (
+      <div class="palette" role="group" aria-label="Copy/paste palette">
+        {typing!.palette!.slice(0, 80).map((ch) => (
+          <button type="button" class="pal-btn" data-copy={ch} title="Copy">
+            {ch}
+          </button>
+        ))}
+      </div>
+    ) : null}
+  </section>
+) : null}
+
+<script is:inline>
+  try {
+    for (const btn of document.querySelectorAll("[data-copy]")) {
+      btn.addEventListener("click", async () => {
+        const t = btn.getAttribute("data-copy") || "";
+        try {
+          await navigator.clipboard.writeText(t);
+          btn.classList.add("copied");
+          window.clearTimeout(btn.__t);
+          btn.__t = window.setTimeout(() => btn.classList.remove("copied"), 600);
+        } catch (_) {
+          // fallback: select prompt
+          window.prompt("Copy:", t);
+        }
+      });
+    }
+  } catch (_) {}
+</script>
+

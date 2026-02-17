@@ -5,6 +5,7 @@ import { SITE } from "../../lib/siteConfig";
 import LanguageFacts from "../../components/LanguageFacts.astro";
 import LocatorMap from "../../components/LocatorMap.astro";
 import TimelineBar from "../../components/TimelineBar.astro";
+import TypingHelp from "../../components/TypingHelp.astro";
 
 export async function getStaticPaths() {
   const entries = await getCollection("languages");
@@ -26,6 +27,30 @@ const hasContext =
   !!entry.data.period ||
   !!entry.data.geo ||
   (entry.data.tags?.length ?? 0) > 0;
+
+// Related languages: same branch if present, else same family.
+const allEntries = await getCollection("languages");
+const family = (entry.data.family || "").trim();
+const branch = (entry.data.branch || "").trim();
+
+function englishSortKey(title: string): string {
+  const t = (title || "").trim();
+  const m = t.match(/[A-Za-z][A-Za-z0-9 .,'’()-]{1,}/);
+  return (m?.[0] || t).trim().toLowerCase();
+}
+
+const related = allEntries
+  .filter((e) => e.slug !== entry.slug)
+  .filter((e) => {
+    const ef = (e.data.family || "").trim();
+    const eb = (e.data.branch || "").trim();
+    if (branch) return eb === branch;
+    if (family) return ef === family;
+    return false;
+  })
+  .map((e) => ({ title: e.data.title, slug: e.slug, sortKey: englishSortKey(e.data.title) }))
+  .sort((a, b) => a.sortKey.localeCompare(b.sortKey) || a.title.localeCompare(b.title))
+  .slice(0, 10);
 ---
 <BaseLayout title={`LexiAtlas — ${entry.data.title}`}>
   <div class="card">
@@ -66,10 +91,34 @@ const hasContext =
           <strong>Link legend</strong>: links marked “(archived)” open an Internet Archive snapshot because the original site is
           down or unreliable.
         </p>
+        <p style="margin:0 0 6px">
+          <a href={`/language/${entry.slug}.md`} class="muted">Download as Markdown</a>
+          <span class="muted"> · </span>
+          <button id="printBtn" type="button" class="link-button muted">Print / Save as PDF</button>
+        </p>
         <p style="margin:0">
           See a dead/outdated resource link? <a href={contributeUrl}>Suggest a link update</a>.
         </p>
       </div>
+
+      {related.length ? (
+        <section class="related-block" aria-label="Related languages">
+          <h2 style="margin-top: 18px">Related languages</h2>
+          <p class="muted" style="margin-top:-6px">
+            {branch ? `Same branch: ${branch}.` : family ? `Same family: ${family}.` : ""}
+          </p>
+          <div class="chip-row">
+            {related.map((r) => (
+              <a class="chip chip-link" href={`/language/${r.slug}/`}>
+                {r.title}
+              </a>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <TypingHelp typing={entry.data.typing} />
+
       <Content />
       <hr />
       <p class="muted" style="margin:0">
@@ -77,5 +126,12 @@ const hasContext =
       </p>
     </article>
   </div>
+
+  <script is:inline>
+    try {
+      const btn = document.getElementById("printBtn");
+      if (btn) btn.addEventListener("click", () => window.print());
+    } catch (_) {}
+  </script>
 </BaseLayout>
 
