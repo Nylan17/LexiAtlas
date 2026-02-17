@@ -1,10 +1,11 @@
 ---
-title: "文語 Bungo (Classical Japanese)"
+title: "文語 Classical Japanese"
 aka:
   - "古語"
   - "古典日本語"
   - "Classical Japanese"
-blurb: "Bungo (文語) is the pre-modern written standard of Japanese, based largely on Heian-period language and used for centuries in literature and formal writing. This page indexes resources for reading and analyzing classical forms (古語), not for learning contemporary spoken Japanese."
+  - "Bungo"
+blurb: "Classical Japanese (文語 / bungo) is the pre-modern written standard of Japanese, based largely on Heian-period language and used for centuries in literature and formal writing. This page indexes resources for reading and analyzing classical forms (古語), not for learning contemporary spoken Japanese."
 family: "Japonic"
 branch: "Japanese"
 region:
@@ -20,7 +21,7 @@ geo:
     lat: 35.01
     lon: 135.77
   radiusKm: 650
-  note: "Centered on the Kyoto region (Heian capital) as a reference point; Bungo is a historical written standard used across Japan."
+  note: "Centered on the Kyoto region (Heian capital) as a reference point; this is a historical written standard used across Japan."
 typing:
   note: "You can type Japanese with a standard IME. For classical texts, you may encounter historical kana orthography (e.g., ゐ/ゑ) and older spellings (e.g., けふ)."
   links:
