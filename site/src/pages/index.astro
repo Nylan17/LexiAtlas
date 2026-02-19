@@ -1,8 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import LocatorMap from "../components/LocatorMap.astro";
 import { WHATS_NEW } from "../lib/whatsNew";
+import { geoEquirectangular, geoPath } from "d3-geo";
+import { feature } from "topojson-client";
+import landTopo from "world-atlas/land-110m.json";
 
 const entries = await getCollection("languages");
 function englishSortKey(title: string): string {
@@ -38,11 +40,77 @@ const languages = entries
   }))
   .sort((a, b) => a.sortKey.localeCompare(b.sortKey) || a.title.localeCompare(b.title));
 
-// Featured language: deterministic rotation so the site feels “alive” without a backend.
-const day = Math.floor(Date.now() / 86400000);
+// Featured language rotates client-side (static deploys won’t rebuild daily).
 const featuredPool = languages.filter((l) => (l.blurb || "").trim());
 const pool = featuredPool.length ? featuredPool : languages;
-const featured = pool.length ? pool[day % pool.length] : null;
+const featuredItems = pool.map((l) => ({
+  title: l.title,
+  slug: l.slug,
+  blurb: l.blurb,
+  family: l.family,
+  branch: l.branch,
+  geo: l.geo
+}));
+const featuredJson = JSON.stringify(featuredItems).replace(/</g, "\\u003c");
+
+// World silhouette path is build-time only; markers update client-side.
+const FEATURE_W = 360;
+const FEATURE_H = 180;
+const scale = FEATURE_W / (2 * Math.PI);
+const projection = geoEquirectangular().scale(scale).translate([FEATURE_W / 2, FEATURE_H / 2]);
+const pathGen = geoPath(projection);
+const landFeature = feature(landTopo as any, (landTopo as any).objects.land) as any;
+const landPath = (pathGen(landFeature) as string) || "";
+
+function clamp(n: number, lo: number, hi: number) {
+  return Math.max(lo, Math.min(hi, n));
+}
+function normLon(lon: number) {
+  return ((lon + 180) % 360 + 360) % 360 - 180;
+}
+function proj(lat: number, lon: number) {
+  const clat = clamp(lat, -85, 85);
+  const clon = normLon(lon);
+  const p = projection([clon, clat]);
+  return { x: p?.[0] ?? 0, y: p?.[1] ?? 0, clat, clon };
+}
+function kmToLatDeg(km: number) {
+  return km / 111;
+}
+function kmToLonDegAtLat(km: number, lat: number) {
+  const r = (Math.PI / 180) * lat;
+  const denom = 111 * Math.max(0.2, Math.cos(r));
+  return km / denom;
+}
+
+const initialGeo = featuredItems[0]?.geo;
+let initialDot: { cx: number; cy: number } | null = null;
+let initialEllipse: { cx: number; cy: number; rx: number; ry: number } | null = null;
+let initialRect: { x: number; y: number; w: number; h: number } | null = null;
+
+if (initialGeo?.center) {
+  const p = proj(initialGeo.center.lat, initialGeo.center.lon);
+  initialDot = { cx: p.x, cy: p.y };
+  const km = initialGeo.radiusKm ?? 0;
+  if (km > 0) {
+    const ry = kmToLatDeg(km);
+    const rx = kmToLonDegAtLat(km, p.clat);
+    const px1 = proj(p.clat + ry, p.clon);
+    const px2 = proj(p.clat, p.clon + rx);
+    initialEllipse = { cx: p.x, cy: p.y, rx: Math.abs(px2.x - p.x), ry: Math.abs(px1.y - p.y) };
+  }
+}
+
+if (initialGeo?.bbox) {
+  const [wLon, sLat, eLon, nLat] = initialGeo.bbox;
+  const p1 = proj(nLat, wLon);
+  const p2 = proj(sLat, eLon);
+  const x = Math.min(p1.x, p2.x);
+  const y = Math.min(p1.y, p2.y);
+  const w = Math.abs(p2.x - p1.x);
+  const h = Math.abs(p2.y - p1.y);
+  initialRect = { x, y, w, h };
+}
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const groups = new Map();
@@ -222,26 +290,73 @@ const regions = Array.from(
         </p>
 
         <div class="welcome-panels" aria-label="Highlights">
-          {featured ? (
+          {featuredItems.length ? (
             <section class="mini-card" aria-label="Featured language">
               <div class="mini-head">
                 <div class="mini-title">Featured language</div>
-                <div class="muted" style="font-size:0.95rem">Rotates daily</div>
               </div>
               <div class="mini-body">
                 <div style="display:flex; gap:14px; align-items:flex-start; flex-wrap:wrap">
                   <div style="flex: 1 1 280px">
                     <div style="font-weight:750; font-size:1.05rem">
-                      <a href={`/language/${featured.slug}/`}>{featured.title}</a>
+                      <a id="featuredLink" href={`/language/${featuredItems[0].slug}/`}>{featuredItems[0].title}</a>
                     </div>
-                    {featured.blurb ? <p class="muted" style="margin:6px 0 0">{featured.blurb}</p> : null}
-                    <div class="facts-row" style="margin-top:10px">
-                      {featured.family ? <span class="chip">Family: {featured.family}</span> : null}
-                      {featured.branch ? <span class="chip">Branch: {featured.branch}</span> : null}
+                    <p id="featuredBlurb" class="muted" style="margin:6px 0 0">{featuredItems[0].blurb}</p>
+                    <div id="featuredChips" class="facts-row" style="margin-top:10px">
+                      {featuredItems[0].family ? <span class="chip">Family: {featuredItems[0].family}</span> : null}
+                      {featuredItems[0].branch ? <span class="chip">Branch: {featuredItems[0].branch}</span> : null}
                     </div>
                   </div>
                   <div style="flex: 0 1 260px; min-width: 220px">
-                    <LocatorMap geo={featured.geo} title={`Featured: ${featured.title}`} showCaption={false} />
+                    <figure class="map" aria-label="Featured language location">
+                      <svg
+                        viewBox={`0 0 ${FEATURE_W} ${FEATURE_H}`}
+                        role="img"
+                        aria-label="Featured language location"
+                        preserveAspectRatio="xMidYMid meet"
+                      >
+                        <rect x="0" y="0" width={FEATURE_W} height={FEATURE_H} class="map-bg" />
+                        {landPath ? <path d={landPath} class="map-land" /> : null}
+                        {[-120, -60, 0, 60, 120].map((lon) => {
+                          const p = projection([lon, 0]);
+                          const x = p?.[0] ?? lon + 180;
+                          return <line x1={x} y1="0" x2={x} y2={FEATURE_H} class="map-grid" />;
+                        })}
+                        {[-60, -30, 0, 30, 60].map((lat) => {
+                          const p = projection([0, lat]);
+                          const y = p?.[1] ?? 90 - lat;
+                          return <line x1="0" y1={y} x2={FEATURE_W} y2={y} class="map-grid" />;
+                        })}
+
+                        <rect
+                          data-featured-rect
+                          rx="3"
+                          class="map-region"
+                          x={initialRect?.x}
+                          y={initialRect?.y}
+                          width={initialRect?.w}
+                          height={initialRect?.h}
+                          style={initialRect ? "" : "display:none"}
+                        />
+                        <ellipse
+                          data-featured-ellipse
+                          class="map-region"
+                          cx={initialEllipse?.cx}
+                          cy={initialEllipse?.cy}
+                          rx={initialEllipse?.rx}
+                          ry={initialEllipse?.ry}
+                          style={initialEllipse ? "" : "display:none"}
+                        />
+                        <circle
+                          data-featured-dot
+                          r="2.2"
+                          class="map-dot"
+                          cx={initialDot?.cx}
+                          cy={initialDot?.cy}
+                          style={initialDot ? "" : "display:none"}
+                        />
+                      </svg>
+                    </figure>
                   </div>
                 </div>
               </div>
@@ -275,7 +390,133 @@ const regions = Array.from(
     </section>
   </div>
 
+  <script id="featuredData" type="application/json" set:html={featuredJson}></script>
+
   <script is:inline>
+    // Featured language: rotate by day on the client (works on static deploys).
+    try {
+      const dataEl = document.getElementById("featuredData");
+      const items = dataEl ? JSON.parse(dataEl.textContent || "[]") : [];
+      if (Array.isArray(items) && items.length) {
+        const day = Math.floor(Date.now() / 86400000);
+        const idx = ((day % items.length) + items.length) % items.length;
+        const it = items[idx] || items[0];
+
+        const link = document.getElementById("featuredLink");
+        if (link && it?.slug && it?.title) {
+          link.textContent = String(it.title);
+          link.setAttribute("href", `/language/${encodeURIComponent(String(it.slug))}/`);
+        }
+
+        const blurb = document.getElementById("featuredBlurb");
+        if (blurb) {
+          const b = String(it?.blurb || "").trim();
+          if (b) {
+            blurb.textContent = b;
+            blurb.style.display = "";
+          } else {
+            blurb.textContent = "";
+            blurb.style.display = "none";
+          }
+        }
+
+        const chips = document.getElementById("featuredChips");
+        if (chips) {
+          chips.textContent = "";
+          const fam = String(it?.family || "").trim();
+          const br = String(it?.branch || "").trim();
+          function addChip(text) {
+            const s = document.createElement("span");
+            s.className = "chip";
+            s.textContent = text;
+            chips.appendChild(s);
+          }
+          if (fam) addChip(`Family: ${fam}`);
+          if (br) addChip(`Branch: ${br}`);
+        }
+
+        const W = 360;
+        const H = 180;
+        function clamp(n, lo, hi) {
+          return Math.max(lo, Math.min(hi, n));
+        }
+        function normLon(lon) {
+          return ((lon + 180) % 360 + 360) % 360 - 180;
+        }
+        function proj(lat, lon) {
+          const clat = clamp(Number(lat), -85, 85);
+          const clon = normLon(Number(lon));
+          const x = ((clon + 180) / 360) * W;
+          const y = ((90 - clat) / 180) * H;
+          return { x, y, clat, clon };
+        }
+        function kmToLatDeg(km) {
+          return Number(km) / 111;
+        }
+        function kmToLonDegAtLat(km, lat) {
+          const r = (Math.PI / 180) * Number(lat);
+          const denom = 111 * Math.max(0.2, Math.cos(r));
+          return Number(km) / denom;
+        }
+
+        const rect = document.querySelector("[data-featured-rect]");
+        const ell = document.querySelector("[data-featured-ellipse]");
+        const dot = document.querySelector("[data-featured-dot]");
+
+        function hide(el) {
+          if (!el) return;
+          el.style.display = "none";
+        }
+        function show(el) {
+          if (!el) return;
+          el.style.display = "";
+        }
+
+        hide(rect);
+        hide(ell);
+        hide(dot);
+
+        const geo = it?.geo || {};
+        if (geo?.bbox && Array.isArray(geo.bbox) && geo.bbox.length === 4 && rect) {
+          const wLon = geo.bbox[0],
+            sLat = geo.bbox[1],
+            eLon = geo.bbox[2],
+            nLat = geo.bbox[3];
+          const p1 = proj(nLat, wLon);
+          const p2 = proj(sLat, eLon);
+          const x = Math.min(p1.x, p2.x);
+          const y = Math.min(p1.y, p2.y);
+          const w = Math.abs(p2.x - p1.x);
+          const h = Math.abs(p2.y - p1.y);
+          rect.setAttribute("x", String(x));
+          rect.setAttribute("y", String(y));
+          rect.setAttribute("width", String(w));
+          rect.setAttribute("height", String(h));
+          show(rect);
+        }
+
+        if (geo?.center && typeof geo.center === "object" && dot) {
+          const p = proj(geo.center.lat, geo.center.lon);
+          dot.setAttribute("cx", String(p.x));
+          dot.setAttribute("cy", String(p.y));
+          show(dot);
+
+          const km = Number(geo.radiusKm || 0);
+          if (km > 0 && ell) {
+            const ry = kmToLatDeg(km);
+            const rx = kmToLonDegAtLat(km, p.clat);
+            const px1 = proj(p.clat + ry, p.clon);
+            const px2 = proj(p.clat, p.clon + rx);
+            ell.setAttribute("cx", String(p.x));
+            ell.setAttribute("cy", String(p.y));
+            ell.setAttribute("rx", String(Math.abs(px2.x - p.x)));
+            ell.setAttribute("ry", String(Math.abs(px1.y - p.y)));
+            show(ell);
+          }
+        }
+      }
+    } catch (_) {}
+
     // Mobile: collapse the browse panel by default.
     try {
       const details = document.getElementById("browseDetails");
